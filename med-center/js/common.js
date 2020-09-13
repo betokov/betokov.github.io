@@ -1,5 +1,6 @@
 $(document).ready(function () {
 	$('.address').selectric();
+	$('.form-inner select').selectric();
 
 	$('.header-left button').on('click', function () {
 		$('.header-right').slideToggle();
@@ -37,11 +38,28 @@ window.onload = function () {
 		pagination: {
 			el: '.cart .swiper-pagination',
 			type: 'bullets',
+			clickable: true,
 		},
 
 		navigation: {
 			nextEl: '.cart .swiper-button-next',
 			prevEl: '.cart .swiper-button-prev',
+		}
+	});
+
+	new Swiper('.order-slider', {
+		loop: true,
+		spaceBetween: 20,
+
+		pagination: {
+			el: '.swiper-pagination',
+			type: 'bullets',
+			clickable: true,
+		},
+
+		navigation: {
+			nextEl: '.swiper-button-next',
+			prevEl: '.swiper-button-prev',
 		}
 	});
 
@@ -53,6 +71,7 @@ window.onload = function () {
 		pagination: {
 			el: '.license .swiper-pagination',
 			type: 'bullets',
+			clickable: true,
 		},
 
 		navigation: {
@@ -118,4 +137,74 @@ window.onload = function () {
 			this.style.display = 'none';
 		});
 	});
+
+
+	let tabLinks = document.querySelectorAll('.tab-list a'),
+		tabItems = document.querySelectorAll('.tab-bottom__item');
+
+	tabItems[0].classList.add('tab-bottom__item_block', 'tab-bottom__item_opacity');
+	tabLinks[0].classList.add('tab-active');
+
+
+	tabLinks.forEach((item, index) => {
+		item.addEventListener('click', function (e) {
+			e.preventDefault();
+			changeTab.call(item);
+		});
+	});
+
+	function changeTab() {
+		let linkHref = this.getAttribute('href');
+
+		tabItems.forEach((item) => {
+			item.classList.remove('tab-bottom__item_block', 'tab-bottom__item_opacity');
+		});
+
+		tabLinks.forEach((item, index) => {
+			item.classList.remove('tab-active');
+		});
+
+		this.classList.add('tab-active');
+		document.querySelector(linkHref).classList.add('tab-bottom__item_block');
+
+		setTimeout(function () {
+			document.querySelector(linkHref).classList.add('tab-bottom__item_opacity');
+		}, 100)
+	}
+
+	let sliders = document.querySelectorAll('.our-centers-slider');
+
+	sliders.forEach((item) => {
+		new Swiper(item, {
+			loop: true,
+			spaceBetween: 0,
+			slidesPerView: 1,
+			observer: true,
+			observeParents: true,
+
+			navigation: {
+				nextEl: item.parentElement.querySelector('.swiper-button-next'),
+				prevEl: item.parentElement.querySelector('.swiper-button-prev'),
+			},
+
+			breakpoints: {
+				1280: {
+					slidesPerView: 2
+				}
+			},
+
+			pagination: {
+				el: item.parentElement.querySelector('.swiper-pagination'),
+				type: 'bullets',
+				clickable: true,
+			},
+
+		});
+
+	});
+
+
 }
+
+
+
