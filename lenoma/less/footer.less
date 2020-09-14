@@ -1,0 +1,288 @@
+.footer{
+	background-color: #302a31;
+	padding: 20px 0;
+	@media only screen and (min-width : 768px) {
+		padding: 60px 0;
+	}
+
+	color: rgba(255, 255, 255, 0.75);
+
+
+
+	.footer_top{
+
+		.about, .catalog, .working{
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+
+
+			text-align: center;
+
+
+			margin-bottom: 40px;
+
+			@media only screen and (min-width : 578px) {
+				display: block;
+				flex-direction: unset;
+				align-items: unset;
+
+
+				text-align: unset;
+			}
+
+			@media only screen and (min-width : 992px) {
+				margin-bottom: unset;
+			}
+		}
+
+		.feedback{
+			max-width: 320px;
+			margin: 0 auto;
+			text-align: center;
+			@media only screen and (min-width : 578px) {
+				margin: unset;
+				max-width: unset;
+				text-align: left;
+			}
+
+			.footer_top-instagram{
+				justify-content: center;
+				@media only screen and (min-width : 578px) {
+					justify-content: unset;
+				}
+			}
+		}
+
+		&-title{
+			color: white;
+			font-size: 18px;
+			font-weight: 700;
+			font-variant: small-caps;
+
+
+			display: block;
+
+
+			margin-bottom: 20px;
+			@media only screen and (min-width : 768px) {
+				margin-bottom: 35px;
+			}
+		}
+
+		&-menu{
+			li{
+				margin-bottom: 15px;
+			}
+			a{
+				color: rgba(255, 255, 255, 0.75);
+				&:hover{
+					text-decoration: none;
+					color: rgba(202, 174, 129, 0.75);
+				}
+			}
+
+			li:last-child a{
+				margin-bottom: 0;
+			}
+		}
+
+
+		.messangers{
+			display: flex;
+			align-items: center;
+
+
+			margin-top: -10px;
+			margin-bottom: 15px;
+
+			.whatsapp{
+				background: url('../img/whatsapp.png') no-repeat;
+				display: block;
+
+
+				width: 26px;
+				height: 26px;
+				margin-left: 20px;
+			}
+			.viber{
+				background: url('../img/viber.png') no-repeat;
+				display: block;
+
+
+				width: 19px;
+				height: 20px;
+				margin-left: 20px;
+			}
+		}
+
+		&-work{
+			margin-bottom: 35px;
+		}
+
+
+		&-call, &-email, &-skype{
+			color: white;
+			font-variant: small-caps;
+			font-weight: 700;
+
+
+			display: block;
+			position: relative;
+
+
+			margin-bottom: 18px;
+			padding-left: 30px;
+
+
+
+			&:before{
+				content: '';
+				position: absolute;
+				top: 2px;
+				left: 0;
+			}
+		}
+
+		&-call:before{
+			background: url('../img/phone.png') no-repeat;
+			width: 9px;
+			height: 11px;
+		}
+		&-email:before{
+			background: url('../img/message.png') no-repeat;
+			width: 14px;
+			height: 11px;
+		}
+		&-skype:before{
+			background: url('../img/skype.png') no-repeat;
+			width: 8px;
+			height: 10px;
+		}
+
+
+
+		&-subscribe{
+			display: flex;
+			flex-direction: column;
+
+
+			margin-bottom: 30px;
+			@media only screen and (min-width : 768px) {
+				margin-bottom: 55px;
+			}
+
+			input[type="email"]{
+				background: none;
+				border: none;
+				border-bottom: 2px solid #c1a067;
+
+
+				margin-bottom: 25px;
+				padding-bottom: 20px;
+
+
+				color: rgba(255, 255, 255, 0.75);
+				font-variant: small-caps;
+			}
+
+			input[type="email"]::-webkit-input-placeholder {
+				color: rgba(255, 255, 255, 0.75);
+				font-variant: small-caps;
+			}
+			input[type="email"]::-moz-placeholder {
+				color: rgba(255, 255, 255, 0.75);
+				font-variant: small-caps;
+			}
+
+			button{
+				align-self: flex-end;
+				background: none;
+				border: none;
+
+
+				color: #c1a067;
+				font-weight: 700;
+				font-variant: small-caps;
+			}
+		}
+
+		&-instagram{
+			display: flex;
+			align-items: center;
+
+			span{
+				margin-left: 20px;
+
+
+				color: white;
+				font-weight: 700;
+				font-variant: small-caps;
+			}
+		}
+
+
+	}
+
+
+
+
+	.footer_bottom{
+		.hr{
+			display: block;
+			background: #3f3a41;
+
+
+			height: 1px;
+			width: 100%;
+			max-width: 1280px;
+			padding: 0 15px;
+			margin: 20px 15px;
+			@media only screen and (min-width : 1300px) {
+				margin: 40px auto;
+			}
+		}
+
+		.copy{
+			text-align: center;
+			margin-bottom: 10px;
+			@media only screen and (min-width : 768px) {
+				text-align: left;
+				margin-bottom: unset;
+			}
+		}
+
+
+		.dev{
+			text-align: center;
+
+
+			max-width: 255px;
+			margin: 0 auto;
+			@media only screen and (min-width : 768px) {
+				text-align: left;
+				max-width: unset;
+				margin: unset;
+				float: right;
+			}
+			position: relative;
+
+			&:before{
+				content: '';
+				position: absolute;
+				top: -2px;
+				left: -30px;
+
+
+				display: block;
+				background: url('../img/lightbulb.png') no-repeat;
+
+
+				width: 15px;
+				height: 20px;
+			}
+		}
+	}
+
+
+}

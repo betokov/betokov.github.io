@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+	<meta charset="UTF-8">
+	<meta name="author" content="Бетоков Барасби">
+	<meta name="keywords" content="Эдита, мехов, писец, кожа, куртки, шубы, пошив">
+	<meta name="description" content="Эдита - мехавая фабрика. Здесь вы найдете множество шуб, курток, мужских и женских. Материалы: писец, кожа, мех и др.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>"Эдита" мехавая фабрика</title>
+	<script>
+		// Этот скрипт должен быть размещён в <head> над всеми внешними объявлениями стилей (link[rel=stylesheet])
+		function loadFont(fontName, woffUrl, woff2Url) {
+  // 0. Многие неподдерживаемые браузеры должны останавливать работу тут.
+  var nua = navigator.userAgent;
+  var noSupport = !window.addEventListener // IE8 и ниже
+        || (nua.match(/(Android (2|3|4.0|4.1|4.2|4.3))|(Opera (Mini|Mobi))/) && !nua.match(/Chrome/)) // Android Stock Browser до 4.4 и Opera Mini
+
+        if (noSupport) {
+        	return;
+        }
+
+  // 1. Настраиваем localStorage
+  var loSto = {};
+  try {
+    // Устанавливаем вспомогательную переменную для помощи с localStorage,
+    // например, для случаев когда cookies отключены и браузер не даёт к ним доступа.
+    // Иначе могут быть получены исключения, которые полностью остановят загрузку шрифтов.
+    loSto = localStorage || {};
+} catch(ex) {}
+
+var localStoragePrefix = 'x-font-' + fontName;
+var localStorageUrlKey = localStoragePrefix + 'url';
+var localStorageCssKey = localStoragePrefix + 'css';
+var storedFontUrl = loSto[localStorageUrlKey];
+var storedFontCss = loSto[localStorageCssKey];
+
+  // 2. Создаём элемент <style>, который мы используем для вставки шрифта, закодированного в base64.
+  var styleElement = document.createElement('style');
+  styleElement.rel = 'stylesheet';
+  document.head.appendChild(styleElement);
+  // Из-за ошибок IE9 установка styleElement.textContent должна быть после этой строки.
+
+  // 3. Проверяем, находится ли шрифт уже в localStorage и последней ли он версии.
+  if (storedFontCss && (storedFontUrl === woffUrl || storedFontUrl === woff2Url)) {
+    // css до сих пор в localStorage
+    // и были загружены из одного из текущих адресов
+
+    // 4. Применяем стили шрифта.
+    styleElement.textContent = storedFontCss;
+} else {
+    // Данных нет, или они загружены с устаревшего URL,
+    // поэтому мы должны загрузить их снова.
+
+    // 5. Проверяем поддержку WOFF2 чтобы узнать, какой URL использовать.
+    var url = (woff2Url && supportsWoff2())
+    ? woff2Url // WOFF2 URL передан в функцию и поддерживается.
+    : woffUrl; // Поддерживается только WOFF.
+
+    // 6. Получаем данные с сервера.
+    var request = new XMLHttpRequest();
+    request.open('GET', url);
+    request.onload = function() {
+    	if (request.status >= 200 && request.status < 400) {
+        // 7. Обновляем localStorage новыми данными и применяем стили шрифта.
+        loSto[localStorageUrlKey] = url;
+        loSto[localStorageCssKey] = styleElement.textContent = request.responseText;
+    }
+};
+request.send();
+}
+
+function supportsWoff2() {
+    // Источник: https://github.com/filamentgroup/woff2-feature-test
+    if (!window.FontFace) {
+    	return false;
+    }
+
+    var f = new FontFace('t', 'url("data:application/font-woff2,") format("woff2")', {});
+    f.load();
+
+    return f.status === 'loading';
+}
+}
+</script>
+<link rel="preload" href="fonts/Circe-Bold.woff2" as="font">
+<link rel="preload" href="fonts/Circe-Light.woff2" as="font">
+<link rel="preload" href="fonts/Circe-Regular.woff2" as="font">
+<link rel="stylesheet" href="css/style-min.css">
+</head>
+<body>
+	<header class="main-header sewing-header">
+		<nav class="main-nav">
+			<div class="container">
+				<ul class="main-nav--menu js-main-nav--menu top-menu">
+					<li class="top-menu--item">
+						<a class="top-menu--link top-menu--link__fura" href="#">Условия доставки</a>
+					</li>
+					<li class="top-menu--item">
+						<a class="top-menu--link top-menu--link__wallet" href="#">Условия оплаты</a>
+					</li>
+					<li class="top-menu--item">
+						<a class="top-menu--link top-menu--link__testimonials" href="#">Отзывы клиентов</a>
+					</li>
+					<li class="top-menu--item">
+						<a class="top-menu--link top-menu--link__questions" href="#">Вопрос-ответ</a>
+					</li>
+					<li class="top-menu--item">
+						<a class="top-menu--link top-menu--link__email" href="#">Контакты</a>
+					</li>
+				</ul>
+			</div>
+		</nav>
+
+		<div class="column-1">
+			<div class="container">
+				<button class="burger js-burger" type="button">Меню</button>
+
+				<a class="logo" href="index.html">
+					<span class="logo--img">
+						<img src="img/logo.png" alt="Лого Эдита меховая фабрика" class="main" width="159" height="35">
+					</span>
+					<p class="logo--title">Меховая Фабрика</p>
+				</a>
+
+				<div class="column-inner">
+					<ul class="sort">
+						<li><a href="#">Женщинам</a></li>
+						<li><a href="#">Мужчинам</a></li>
+						<li><a href="#">Детям</a></li>
+					</ul>
+
+					<div class="button-column">
+						<a class="btn-header btn-header__gray" href="#">Бесплатная консультация<br> модельера</a>
+
+						<a class="btn-header btn-header__red" href="#">Закажите шубу<br> по вашим меркам</a>
+
+						<a class="header-phone" href="tel:+79283471718">+7 928 347 17 18</a>
+					</div>
+				</div>
+			</div><!-- end container -->
+		</div><!-- end column-1 -->
+	</header>
+
+	<div class="sewing-order">
+		<div class="container">
+			<h1 class="sewing-order--title">Шуба на заказ</h1>
+			<ul class="sewing-order--breadcrumb breadcrumb-list">
+				<li class="breadcrumb--item">
+					<a class="breadcrumb--link" href="/">Главная</a>
+				</li>
+				<li class="breadcrumb--item">
+					<a class="breadcrumb--link breadcrumb--current">Шуба на заказ</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<main class="sewing-main">
+		<section class="measure">
+			<div class="container">
+				<h2 class="measure--title">Снятие мерок</h2>
+				<p class="measure--description">
+					Для более точной оценки сроков пошива и стоимости изделия на заказ,
+					предлагаем вам заполнить следующие данные:
+				</p>
+
+				<form action="#" class="measure--form" method="post">
+					<div class="size">
+						<div class="column-1">
+							<span>
+								<img src="img/sewing/measure-1.jpg" alt="Высота груди" width="86" height="174">
+							</span>
+							<p>
+								<label for="heightChest">Высота груди</label>
+								<input id="heightChest" class="heightChest" type="text"  name="heightChest" value="45"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-2">
+							<span>
+								<img src="img/sewing/measure-2.jpg" alt="Высота до талии спереди" width="87" height="174">
+							</span>
+							<p>
+								<label for="heightWaist">Высота до талии<br> спереди</label>
+								<input id="heightWaist" class="heightWaist" type="text" name="heightWaist"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-3">
+							<span>
+								<img src="img/sewing/measure-3.jpg" alt="Ширина спины" width="97" height="169">
+							</span>
+							<p>
+								<label for="widthBack">Ширина спины</label>
+								<input id="widthBack" class="widthBack" type="text" name="widthBack"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-4">
+							<span>
+								<img src="img/sewing/measure-4.jpg" alt="Ширина плеча" width="87" height="173">
+							</span>
+							<p>
+								<label for="widthShoulder">Ширина плеча</label>
+								<input id="widthShoulder" class="widthShoulder" type="text" name="widthShoulder"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-5">
+							<span>
+								<img src="img/sewing/measure-5.jpg" alt="Обхват груди" width="95" height="166">
+							</span>
+							<p>
+								<label for="widthChest">Обхват груди</label>
+								<input id="widthChest" class="widthChest" type="text" name="widthChest"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-6">
+							<span>
+								<img src="img/sewing/measure-6.jpg" alt="Обхват бедер" width="98" height="170">
+							</span>
+							<p>
+								<label for="widthHip">Обхват бедер</label>
+								<input id="widthHip" class="widthHip" type="text" name="widthHip"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-7">
+							<span>
+								<img src="img/sewing/measure-7.jpg" alt="Длина спины до талии" width="97" height="168">
+							</span>
+							<p>
+								<label for="heightBackToWeist">Длина спины<br> до талии</label>
+								<input id="heightBackToWeist" class="heightBackToWeist" type="text" name="heightBackToWeist"><span>см</span>
+							</p>
+						</div>
+
+						<div class="column-8">
+							<span>
+								<img src="img/sewing/measure-8.jpg" alt="Длина изделия" width="109" height="340">
+							</span>
+							<div>
+								<p class="lengthProduct">
+									<label for="lengthProduct">Длина изделия</label>
+									<input id="lengthProduct" type="text" name="lengthProduct"><span>см</span>
+								</p>
+								<p class="lengthArm">
+									<label for="lengthArm">Длина рукава</label>
+									<input id="lengthArm" type="text" name="lengthArm"><span>см</span>
+								</p>
+							</div>
+						</div>
+					</div>
+
+					<div class="form-column">
+						<div class="other">
+							<p>
+								<label for="name">Как к вам обращаться?</label>
+								<input id="name" class="name" type="text" placeholder="Ваше имя*">
+							</p>
+
+							<p>
+								<label for="phone">Для дальнейшего общения нашего специалиста с вами укажите своит контакты</label>
+								<input id="phone" class="phone" type="tel" placeholder="+7(___) ___-__ -__*">
+							</p>
+
+							<p>
+								<label for="comment">Вы можете указать желаемый размер, цвет, вид меха или задать нам любой интересующий вас вопрос</label>
+								<textarea id="comment" class="comment" name="comment" cols="30" rows="10" placeholder="Ваш комментарий"></textarea>
+							</p>
+
+							<p>
+								<label for="photo">По желанию, вы можете прикрепить свое фото или картинку с фасоном изделия</label>
+
+								<label for="photo" class="fileblock">
+									<span class="inputfile">Прикрепить фото</span>
+									<input id="photo" class="visually-hidden" type="file">
+								</label>
+							</p>
+						</div>
+
+						<div class="bottom-block">
+							<label class="remember" for="remember">
+								<input id="remember" class="visually-hidden" type="checkbox" name="remember" checked>
+								<span class="checkbox-indicator"></span>
+								<a href="#">Согласие </a> с политикой персональных данных
+							</label>
+
+							<button class="measure--btn" type="submit">Заказать пошив</button>
+						</div>
+					</div>
+				</form>
+			</div>
+		</section>
+	</main>
+
+	<div class="my-ad ad-sewing blockForMap">
+		<div class="my-ad--demonstration">
+
+			<div class="my-ad--block">
+				<p class="my-ad--heading">посетите наш
+					<span>Демонстрационный зал</span>
+				</p>
+				<p class="my-ad--description">
+					Для гостей городов Кавказких Минеральных Вод мы организуем
+					<span>Бесплатный трансфер</span>
+				</p>
+
+				<a class="btn my-ad--btn" href="#">Подробнее</a>
+			</div>
+
+		</div>
+
+		<div class="my-ad--service">
+
+			<div class="my-ad--block">
+				<p class="my-ad--heading">Клиентский сервис</p>
+				<p class="my-ad--description">
+					<span>Гарантия обслуживания</span>  товара  1 год!
+					Обязательная примерка перед покупкой и подгон шубы под размер,
+					если она не подошла вам.
+				</p>
+			</div>
+		</div>
+	</div>
+
+	<footer class="main-footer">
+		<div class="main-footer--top">
+			<div class="container">
+				<div class="column-1">
+					<a class="main-footer--logo">
+						<span>
+							<img src="img/logo.png" alt="Лого Эдита" width="159" height="35">
+						</span>
+						<p>Меховая фабрика</p>
+					</a>
+					<ul class="main-footer--nav">
+						<li><a href="#">О фабрике</a></li>
+						<li><a href="#">Статьи</a></li>
+						<li><a href="#">Вопрос-ответ</a></li>
+						<li><a href="#">Отзывы</a></li>
+						<li><a href="#">Контакты</a></li>
+						<li><a href="#">Пошив на заказ</a></li>
+						<li><a href="#">Скидки</a></li>
+					</ul>
+				</div>
+
+				<div class="column-2">
+
+					<div class="main-footer--adress">
+						<ul>
+							<li><a href="tel:+79283471718">+7 928 347 17 18</a></li>
+							<li><a href="tel:+79624425595">+7 962 442-55-95</a></li>
+							<li><a href="tel:+78793396539">+7 8793 39-65-39</a></li>
+						</ul>
+						<p>
+							г. Пятигорск, <br>
+							ул. Краснослободская <br>
+							д. 13
+						</p>
+					</div>
+					<div class="main-footer--bottom-navigation">
+						<fieldset>
+							<legend>Шубы</legend>
+
+							<ul>
+								<li><a href="#">Шубы из норки</a></li>
+								<li><a href="#">Цветные шубы</a></li>
+								<li><a href="#">Шубы из мутона</a></li>
+								<li><a href="#">Шубы из чернобурки</a></li>
+								<li><a href="#">Шубы из астрагана</a></li>
+								<li><a href="#">Шубы из соболя</a></li>
+								<li><a href="#">Шубы из песца</a></li>
+								<li><a href="#">Шубы из нутрии</a></li>
+								<li><a href="#">Шубы из каракуля</a></li>
+								<li><a href="#">Шубы комбинированные</a></li>
+							</ul>
+						</fieldset>
+
+						<fieldset>
+							<legend>Дубленки</legend>
+
+							<ul>
+								<li><a href="#">Из норки</a></li>
+								<li><a href="#">Цветные шубы</a></li>
+								<li><a href="#">Цветные</a></li>
+								<li><a href="#">Шубы из мутона</a></li>
+								<li><a href="#">Шубы из чернобурки</a></li>
+								<li><a href="#">Шубы из астрагана</a></li>
+								<li><a href="#">Шубы из соболя</a></li>
+								<li><a href="#">Шубы из песца</a></li>
+								<li><a href="#">Шубы из нутрии</a></li>
+							</ul>
+						</fieldset>
+
+						<fieldset>
+							<legend>Меховые жилеты</legend>
+
+							<ul>
+								<li><a href="#">Шубы из норки</a></li>
+								<li><a href="#">Цветные шубы</a></li>
+								<li><a href="#">Шубы из мутона</a></li>
+								<li><a href="#">Шубы из чернобурки</a></li>
+								<li><a href="#">Шубы из астрагана</a></li>
+							</ul>
+						</fieldset>
+
+						<fieldset>
+							<legend>Изделия из кожи</legend>
+
+							<ul>
+								<li><a href="#">Шубы из норки</a></li>
+								<li><a href="#">Цветные шубы</a></li>
+								<li><a href="#">Шубы из мутона</a></li>
+								<li><a href="#">Шубы из чернобурки</a></li>
+								<li><a href="#">Шубы из астрагана</a></li>
+								<li><a href="#">Шубы из соболя</a></li>
+								<li><a href="#">Шубы из песца</a></li>
+								<li><a href="#">Шубы из нутрии</a></li>
+							</ul>
+						</fieldset>
+
+					</div><!-- end bottom-navigation -->
+				</div><!-- end column-1 -->
+			</div><!-- end container -->
+		</div>
+
+		<div class="main-footer--bottom">
+
+			<div class="main-footer--map">
+				<span>
+					<img src="img/map.jpg" alt="Мы находимся по адресу г. Москва ул. Восточная 21" width="1600" height="147">
+				</span>
+				<div id="map" class="my-map"></div>
+				<a href="https://yandex.ru/maps/213/moscow/search/%D1%83%D0%BB%20%D1%81%D1%82%D1%83%D0%B4%D0%B5%D0%BD%D1%87%D0%B5%D1%81%D0%BA%D0%B0%D1%8F%2033%20%D0%BA%208/?ll=37.541278%2C55.738226&sll=37.541278%2C55.738226&sspn=0.014543%2C0.004642&z=16.38" target="_blank">Карта проезда</a>
+			</div>
+
+			<div class="main-footer--coopyright">
+				<div class="container">
+					<p>© Меховая фабрика «Эдита», 2018</p>
+					<p><a href="#">Пользовательское соглашение</a><a href="#">Политика конфиденциальности</a></p>
+					<p>Сделано Webelement</p>
+				</div>
+			</div>
+		</div>
+	</footer>
+
+	<script src="js/libs-min.js" defer></script>
+	<script src="js/main-min.js" defer></script>
+	<script class="new-map"></script>
+</body>
+</html>

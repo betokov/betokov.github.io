@@ -5,7 +5,11 @@ $(document).ready(function () {
 	$('.header-left button').on('click', function () {
 		$('.header-right').slideToggle();
 
-		$(this).toggleClass('header-close')
+		if ($(this).find('img').attr('src') == 'img/burger.png') {
+			$(this).find('img').attr('src', 'img/close.png');
+		} else {
+			$(this).find('img').attr('src', 'img/burger.png');
+		}
 	});
 
 	$('.header-links-mobile h2').each(function () {

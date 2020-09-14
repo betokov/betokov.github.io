@@ -1,0 +1,248 @@
+.ideal{
+	margin-top: 65px;
+	position: relative;
+
+
+	.ideal-block{
+		margin-bottom: 60px;
+		@media only screen and (min-width : 992px) {
+			display: flex;
+		}
+
+	}
+
+	.ideal-item{
+
+		@media only screen and (min-width : 992px) {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+		}
+
+		h1{
+			color: #302a31;
+			font-size: 30px;
+			font-weight: 700;
+			text-align: center;
+			font-variant: small-caps;
+			@media only screen and (min-width : 992px) {
+				width: 546px;
+				margin-top: 20px;
+				margin-bottom: 60px;
+
+
+				font-size: 56px;
+				text-align: left;
+
+
+				z-index: 2;
+			}
+			margin-bottom: 30px;
+
+		}
+
+		span{
+			border-bottom: 2px solid #c1a067;
+			display: none;
+			@media only screen and (min-width : 992px) {
+				display: block;
+			}
+
+			a{
+				color: #c1a067;
+				font-size: 14px;
+				font-weight: 700;
+				line-height: 24px;
+				font-variant: small-caps;
+
+				&:hover{
+					text-decoration: none;
+				}
+			}
+		}
+	}
+
+	.options{
+		color: #302a31;
+		font-variant: small-caps;
+		text-align: center;
+
+
+		display: block;
+		position: relative;
+
+
+		margin-bottom: 30px;
+
+
+
+		@media only screen and (min-width : 992px) {
+			margin-bottom: unset;
+			text-align: left;
+			padding-left: 100px;
+
+			&:before{
+				content: '';
+				position: absolute;
+				top: 7px;
+				left: 0;
+
+
+				width: 80px;
+
+
+				display: block;
+				border: 1px solid #eceaed;
+			}
+		}
+	}
+
+
+
+	.recomend{
+		display: none;
+
+		@media only screen and (min-width : 1300px) {
+			padding-left: 45px;
+			padding-top: 45px;
+			padding-bottom: 50px;
+			width: 330px;
+
+
+			display: block;
+			box-sizing: border-box;
+			background-color: #f9f9f9;
+			box-shadow: -32.5px 28.2px 54px rgba(36, 25, 5, 0.05);
+
+			position: absolute;
+			top: -25px;
+			right: 47px;
+			z-index: 1000;
+
+			h3{
+				color: #302a31;
+				font-size: 20px;
+				font-weight: 700;
+				font-variant: small-caps;
+
+
+				margin-bottom: 40px;
+			}
+
+
+			span{
+				width: 332px;
+				height: 2px;
+
+
+				display: block;
+				background-color: #c1a067;
+			}
+
+
+			ul{
+				margin-top: 40px;
+				a{
+
+					font-size: 16px;
+					line-height: 36px;
+
+					color: #302a31;
+
+					&:hover{
+						color: #c16774;
+						text-decoration: none;
+					}
+				}
+			}
+		}
+
+	}
+
+}
+
+
+.owl-carousel3{
+	position: relative;
+
+
+	@media only screen and (min-width : 992px) {
+		margin-left: -330px;
+		max-width: 740px;
+	}
+
+	@media only screen and (min-width : 1200px) {
+		max-width: 900px;
+	}
+
+	@media only screen and (min-width : 1300px) {
+		max-width: 1040px;
+	}
+
+	.owl-dots{
+		position: absolute;
+		left: 30px;
+		bottom: 20px;
+		@media only screen and (min-width : 992px) {
+			left: 50px;
+			bottom: 40px;
+		}
+		display: flex;
+
+
+
+		.owl-dot{
+			margin-right: 35px;
+
+			span{
+				width: 10px;
+				height: 10px;
+
+
+				display: block;
+				border:2px solid #c1a067;
+			}
+		}
+		.active{
+			background: #c1a067;
+		}
+	}
+
+
+	.ideal-perfume{
+		display: flex;
+		align-items: flex-end;
+
+
+		position: absolute;
+		top: 50%;
+		left: 59%;
+		transform: translate(-59%, -50%);
+
+
+		img{
+			width: 55px;
+			@media only screen and (min-width : 1200px) {
+				width: 110px;
+			}
+			margin-right: 50px;
+		}
+
+		span{
+			color: #302a31;
+			font-size: 13px;
+			font-weight: 400;
+			line-height: 24px;
+
+
+			margin-bottom: 30px;
+		}
+	}
+
+
+
+
+}
+
+
+

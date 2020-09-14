@@ -1,0 +1,536 @@
+.header{
+	margin-top: 20px;
+}
+
+
+/*UP_HEADER
+*************************************************/
+
+.up_header{
+	@media only screen and (min-width : 992px) {
+		height: 100px;
+		padding: 10px 0;
+	}
+
+	padding: 20px 0;
+
+	.logo{
+		max-width: 310px;
+		margin: 0 auto;
+		margin-bottom: 30px;
+
+		@media only screen and (min-width : 576px) {
+			max-width: 400px;
+		}
+
+		@media only screen and (min-width : 992px) {
+			max-width: unset;
+			margin-bottom: unset;
+		}
+
+		a{
+			float: left;
+			width: 70px;
+			height: 70px;
+
+			@media only screen and (min-width : 992px) {
+				width: unset;
+				height: unset;
+
+			}
+
+
+			img{
+				width: 100%;
+				@media only screen and (min-width : 992px) {
+					width: unset;
+				}
+			}
+
+		}
+		p{
+			float: left;
+			margin-top: 10px;
+			color: #333;
+			max-width: 194px;
+			font-weight: 300;
+			margin-left: 6px;
+			font-size: 15px;
+			line-height: 20px;
+
+			@media only screen and (min-width : 576px) {
+				max-width: 280px;
+				font-size: 16px;
+				margin-top: 25px;
+				line-height: unset;
+
+			}
+
+			@media only screen and (min-width : 992px) {
+				width: 390px;
+				max-width: unset;
+				font-size: 24px;
+				margin-left: 25px;
+			}
+		}
+	}
+
+
+}
+
+.call{
+	@media only screen and (min-width : 992px) {
+		float: right;
+		width: unset;
+	}
+
+	width: 250px;
+	margin: auto;
+	font-family: "HNC-L";
+
+
+
+	span{
+		width: 148px;
+		margin: 0 auto;
+
+		@media only screen and (min-width : 992px) {
+			width: unset;
+			margin: unset;
+			font-size: 30px;
+		}
+		color: #333333;
+		font-size: 20px;
+		font-weight: normal;
+	}
+
+	.call_number{
+		position: relative;
+		padding-left: 25px;
+		display: block;
+		margin-bottom: 15px;
+		&:before{
+			content: '';
+			background: url('../img/apple.png')no-repeat;
+			width: 17px;
+			height: 30px;
+			display: block;
+			position: absolute;
+			top: -7px;
+			left: 0;
+
+			@media only screen and (min-width : 992px) {
+				top: -2px;
+			}
+		}
+
+		&_bold{
+			font-family: "HNC-M";
+			font-weight: 500;
+		}
+	}
+	button{
+		width: 250px;
+		height: 35px;
+		background-color: #009900;
+		font-size: 22px;
+		color: #fff;
+		border: none;
+		font-weight: 300;
+		cursor: pointer;
+		text-align: center;
+	}
+}
+
+/*************************************************/
+
+
+
+
+
+/*HEADER_DOWN
+***************************************************/
+.head-man{
+	position: relative;
+
+	&:before{
+		content: '';
+		background: url('../img/head-man.png');
+		position: absolute;
+		bottom: -37px;
+		right: 35px;
+		width: 265px;
+		height: 400px;
+		display: block;
+		z-index: 1;
+		display: none;
+		@media only screen and (min-width : 992px) {
+			display: block;
+		}
+	}
+
+}
+
+.down_header{
+
+	background: url('../img/bg_other.jpg')no-repeat;
+	background-size: cover;
+	padding-top: 20px;
+
+	@media only screen and (min-width : 992px) {
+		padding-bottom: unset;
+	}
+
+
+
+	/*LEFT*/
+	.img-block{
+
+		@media only screen and (min-width : 992px) {
+			width: 362px;
+			max-width: unset;
+			margin: unset;
+		}
+		max-width: 280px;
+		margin: 0 auto;
+
+		.turnik{
+			position: relative;
+
+			img{
+				max-width: 280px;
+
+				@media only screen and (min-width : 992px) {
+					width: 362px;
+					height: 401px;
+					max-width: unset;
+				}
+
+			}
+
+			.price{
+				position: absolute;
+				top: 0;
+				right: 0;
+				@media only screen and (min-width : 992px) {
+					right: 60px;
+				}
+				background: url('../img/circle.png') no-repeat;
+				width: 125px;
+				height: 125px;
+				text-align: center;
+				display: table-cell;
+				vertical-align: middle;
+
+				.old-price{
+					display: block;
+					color: #333333;
+					font-size: 22px;
+					margin-top: 35px;
+					&>span{
+						text-decoration: line-through;
+					}
+				}
+
+				.new-price{
+					display: block;
+					margin-top: 10px;
+					color: #cb0000;
+					font-family: "HNC-B";
+					font-size: 30px;
+				}
+
+
+			}
+
+
+		}
+
+
+		p{
+			position: relative;
+			color: #333333;
+			font-size: 18px;
+			width: 153px;
+			line-height: 25px;
+			padding-left: 45px;
+
+			&:before{
+				position: absolute;
+				top: 10px;
+				left: 0;
+				content: '';
+				background: url('../img/rotate.png')no-repeat;
+				display: block;
+				width: 29px;
+				height: 29px;
+			}
+
+
+
+			span{
+				font-family: "HNC-M";
+				font-weight: 500;
+			}
+		}
+
+	}
+
+
+	/*RIGHT*/
+	.head-down_right{
+
+		max-width: 350px;
+		margin: 0 auto;
+		margin-top: 20px;
+
+		@media only screen and (min-width : 992px) {
+			float: right;
+			margin-top: unset;
+		}
+
+
+
+
+		.callback{
+			background: #fff;
+			@media only screen and (min-width : 992px) {
+				width: 350px;
+				margin-top: unset;
+			}
+			margin: 0 auto;
+			margin-top: 20px;
+			text-align: center;
+
+
+
+			.header-headline{
+				background-color: #ffcc00;
+				color: #ffffff;
+				font-size: 15px;
+				@media only screen and (min-width : 992px) {
+					font-size: 18px;
+				}
+				padding: 10px 0;
+				span{
+					font-family: "HNC-M";
+					font-size: 20px;
+					@media only screen and (min-width : 992px) {
+						font-size: 24px;
+					}
+					display: block;
+				}
+			}
+
+
+			input[type="text"], input[type="email"]{
+				background-color: #f5f5f5;
+				width: 300px;
+				@media only screen and (min-width : 992px) {
+					width: 330px;
+
+				}
+				margin: 10px auto 0;
+				box-sizing: border-box;
+			}
+
+			input[type="submit"]{
+				margin-top: 20px;
+				width: 300px;
+				@media only screen and (min-width : 992px) {
+					width: 330px;
+				}
+			}
+
+
+			.box-check{
+				width: 300px;
+				@media only screen and (min-width : 992px) {
+					width: 330px;
+				}
+				margin: 0 auto;
+				margin-top: 20px;
+				text-align: left;
+				position: relative;
+
+				@media only screen and (min-width : 992px) {
+					&:after{
+						position: absolute;
+						top: 0;
+						right: 0;
+						display: block;
+						content: '';
+						background: url('../img/question.png')no-repeat;
+						width: 20px;
+						height: 20px;
+						cursor: pointer;
+					}
+				}
+
+
+				input[type="checkbox"]{
+					display: none;
+				}
+
+				label{
+
+					color: #656565;
+
+					font-size: 14px;
+					span{
+						color: #990000;
+					}
+				}
+
+
+				input[type=checkbox] + label:before {
+					cursor: pointer;
+					content: "\25A0";
+					color: transparent;
+					display: inline-block;
+					border: 1px solid #cccccc;
+					margin: -5px 5px 0 0;
+					height: 20px;
+					width: 20px;
+					font-size: 30px;
+					line-height: 12px;
+					text-align: center;
+					vertical-align: middle;
+					box-sizing: border-box;
+				}
+
+				input[type=checkbox]:checked + label:before {
+					color: #990000;;
+
+				}
+
+
+			}
+
+
+
+		}
+
+
+		.sale{
+
+			max-width: 300px;
+			margin: 10px auto ;
+
+			@media only screen and (min-width : 992px) {
+				max-width: unset;
+				margin:10px 0;
+			}
+
+
+			.akcia{
+				background: url('../img/akcia.png') no-repeat;
+				width: 100px;
+				float: left;
+				padding: 30px 0 10px;
+				span{
+					display: block;
+					text-align: center;
+					margin-bottom: 5px;
+
+
+					&:nth-of-type(1){
+						color: #000000;
+						font-size: 18px;
+						font-family: "HNC-B";
+
+					}
+
+					&:nth-of-type(2){
+
+					}
+					&:nth-of-type(3){
+						color: #980000;
+						font-family: "HNC-B";
+						font-size: 24px;
+					}
+
+					&:last-of-type{
+						margin-bottom: 0;
+					}
+
+				}
+
+
+			}
+
+			.timer{
+				margin-left: 20px;
+				margin-top: 32px;
+				@media only screen and (min-width : 992px) {
+					margin-top: 10px;
+				}
+				.headline{
+					color: #333333;
+					font-size: 15px;
+					@media only screen and (min-width : 992px) {
+						font-size: 18px;
+					}
+					margin-bottom: 10px;
+					display: block;
+				}
+
+				.hour, .minutes, .seconds{
+					position: relative;
+					&:after{
+						position: absolute;
+						bottom: -15px;
+						left: 7px;
+						display: block;
+						font-size: 10px;
+						@media only screen and (min-width : 992px) {
+							font-size: 14px;
+							left: 3px;
+						}
+						color: #333;
+					}
+				}
+
+				.hour{
+					&:after{
+						content:'часов';
+					}
+				}
+				.minutes{
+					&:after{
+						content:'минут';
+					}
+				}
+				.seconds{
+					&:after{
+						content:'секунд';
+					}
+				}
+
+
+				float: left;
+				color: #990000;
+				font-size: 30px;
+				@media only screen and (min-width : 992px) {
+					font-size: 36px;
+				}
+			}
+		}
+
+
+
+	}
+
+
+
+
+
+
+
+}
+
+
+
+/*************************************************/
+
+

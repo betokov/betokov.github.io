@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<style>
+		.slider{
+			position: absolute;
+			top:50%;
+			left: 50%;
+			transform: translate(-50%, -50%);
+			border: 1px solid gray;
+			width: 400px;
+			background: gray;
+			padding: 18px;
+		}
+
+		.inner{
+			border: 1px solid gray;
+			border-radius:10px;
+			background: #fff;
+		}
+
+		.right{
+			position: absolute;
+			top: 50%;
+			transform: translate(0%, -50%);
+			right: -1px;
+			cursor: pointer;
+			width: 20px;
+		}
+
+		.left{
+			position: absolute;
+			top: 50%;
+			transform: translate(0%, -50%);		
+			left: -1px;
+			cursor: pointer;
+			width: 20px;
+		}
+		.img{
+			width: 200px;
+			height: 200px;
+			margin: 0 auto;
+		}
+
+		img{
+			width: 100%;
+			height: 100%;
+		}
+	</style>
+</head>
+<body>
+
+	<div class="slider">
+		<div class="inner">
+
+			<div class="img" id="img">
+				<img src="" alt="img-slider">
+			</div>
+
+			<input type="button" value=">" class="right" id="right">
+			<input type="button" value="<" class="left" id="left">
+		</div>
+	</div>
+	
+
+
+	<script>
+		var slider = {
+			img : ['images1', 'images2', 'images3'],
+			frame: 0,
+
+			set: function(image) {
+				document.querySelector('#img img').setAttribute('src', 'slider/'+image+'.jpg');
+			},
+
+			init: function() {
+				this.set(this.img[this.frame]);
+			},
+
+			right: function() {
+				slider.frame++;	
+				if(slider.frame == slider.img.length){
+					slider.frame = 0;
+				}
+				slider.set(slider.img[slider.frame]);
+			},
+
+			left: function() {
+				slider.frame--;	
+				if(slider.frame < 0){
+					slider.frame = slider.img.length - 1;
+				}
+				slider.set(slider.img[slider.frame]);
+			}
+
+		}
+
+		window.onload = function(){
+
+			slider.init();
+
+			var buttonRight = document.getElementById("right");
+			var buttonLeft = document.getElementById("left");
+
+			buttonRight.addEventListener('click', slider.right);
+			buttonLeft.addEventListener('click', slider.left);
+			
+
+			setInterval(function(){
+				slider.right();
+			}, 3000);
+		};
+	</script>
+</body>
+</html>

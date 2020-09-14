@@ -1,0 +1,133 @@
+@import url("reset");
+
+.body{
+	font-family: HNC-L;
+	font-size: 18px;
+	background: #fff;
+}
+
+h1{
+	font-size: 25px;
+	color: white;
+	text-transform: uppercase;
+	text-align: center;
+	@media only screen and (min-width : 992px) {
+		font-size: 36px;
+	}
+}
+
+.black{
+	color: #333;
+}
+
+.container{
+	max-width: 960px;
+	margin: 0 auto;
+}
+
+.row:after{
+	display: block;
+	content: " ";
+	clear: both;
+}
+
+
+.wrapper{
+	box-sizing: border-box;
+	padding: 0 25px;
+	@media only screen and (min-width : 992px) {
+		padding: 0;
+	}
+}
+
+.padding{
+	@media only screen and (min-width : 992px) {
+		padding: 0 17px;
+	}
+	box-sizing: border-box;
+}
+.margin_bottom{
+
+	margin-bottom: 40px !important;
+}
+
+.col-40 {
+	width: 100%;
+	@media only screen and (min-width : 992px) {
+		width: 40%;
+		float: left;
+	}
+
+}
+
+.col-50 {
+	width: 100%;
+	@media only screen and (min-width : 992px) {
+		width: 50%;
+		float: left;
+	}
+
+}
+
+.col-60 {
+	width: 100%;
+	@media only screen and (min-width : 992px) {
+		width: 60%;
+		float: left;
+	}
+
+}
+
+.col-70 {
+	width: 100%;
+	@media only screen and (min-width : 992px) {
+		width: 70%;
+		float: left;
+	}
+
+}
+
+
+.col-30 {
+	width: 100%;
+	@media only screen and (min-width : 992px) {
+		width: 30%;
+		float: left;
+	}
+
+}
+
+input[type="text"]{
+	color: #656565;
+	font-size: 18px;
+	font-style: italic;
+}
+
+
+input[type="submit"]{
+	color: white;
+	font-size: 24px;
+	background-color: #900;
+	border: none;
+	font-family: HNC-L;
+	text-transform: uppercase;
+	height: 60px;
+	background: url('../img/submit.jpg') no-repeat;
+	cursor: pointer;
+}
+
+
+
+
+
+@import url("fonts");
+@import url("header");
+@import url("ourproperty");
+@import url("characteristic");
+@import url("description");
+@import url("next_product");
+@import url("video");
+@import url("reviews");
+@import url("after_train");
+@import url("footer");
+@import url("modal.less");

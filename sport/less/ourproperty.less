@@ -1,0 +1,108 @@
+.ourProperty{
+	background: url('../img/bg-description.jpg') no-repeat;
+	background-size: cover;
+	padding: 30px 0;
+	text-align: center;
+
+	.second {
+
+		@media only screen and (min-width : 992px) {
+			margin-bottom: 30px;
+		}
+		
+	}
+
+	.function{
+		
+		width: 100%;
+		margin-bottom: 30px;
+		box-sizing: border-box;
+
+		@media only screen and (min-width : 992px) {
+			width: 33.33%;
+			float: left;
+			margin-bottom: 0;
+		}
+
+
+		span{
+			display: block;
+			color: #fff;
+			font-size: 20px;
+			@media only screen and (min-width : 992px) {
+				font-size: 24px;
+			}
+		}
+
+		.one, .two, .three, .four, .five, .six{
+			font-family: "HNC-B"; 
+			font-size: 22px;
+			@media only screen and (min-width : 992px) {
+				font-size: 30px;
+			}
+
+			&:before{
+				display: block;
+				content: "";
+				margin: 0 auto;
+				margin-bottom: 20px;
+			}
+		}
+
+		.one{
+			&:before{
+				background: url('../img/man.png') no-repeat;
+				width: 44px;
+				height: 76px;
+			}
+		}
+
+			.two{
+			&:before{
+				background: url('../img/clock.png') no-repeat;
+				width: 63px;
+				height: 76px;
+			}
+		}
+
+			.three{
+			&:before{
+				background: url('../img/3.png') no-repeat;
+				width: 73px;
+				height: 76px;
+			}
+		}
+
+			.four{
+			&:before{
+				background: url('../img/box.png') no-repeat;
+				width: 86px;
+				height: 76px;
+			}
+		}
+
+
+			.five{
+			&:before{
+				background: url('../img/bus.png') no-repeat;
+				width: 112px;
+				height: 76px;
+			}
+		}
+
+
+			.six{
+			&:before{
+				background: url('../img/wrench.png') no-repeat;
+				width: 76px;
+				height: 76px;
+			}
+		}
+
+
+
+	}
+
+
+
+}
