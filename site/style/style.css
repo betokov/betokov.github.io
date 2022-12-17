@@ -1,0 +1,302 @@
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+
+  list-style: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  margin: 0;
+}
+
+*,
+*::before,
+*:after {
+  box-sizing: border-box;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+.up {
+  padding-top: 60px;
+  padding-bottom: 99px;
+  padding-right: 15px;
+  padding-left: 15px;
+  max-width: 1440px;
+  margin: 0 auto;
+
+  background-position: 0 0;
+  background-repeat: no-repeat;
+  background-image: url("../img/up-bg.jpg");
+  background-color: gray;
+  background-size: cover;
+}
+
+.up-container {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.up .logo {
+  max-width: 176px;
+  margin: 0 auto 52px;
+  display: block;
+}
+
+nav {
+  margin-bottom: 58px;
+}
+
+nav ul {
+  display: flex;
+  justify-content: space-between;
+}
+
+nav a {
+  text-decoration: none;
+  text-transform: uppercase;
+  color: #FFFFFF;
+  position: relative;
+}
+
+.active-page::after {
+  content: "";
+
+  height: 2px;
+  width: 50px;
+
+  background-color: rgba(255, 255, 255, 0.3);
+  position: absolute;
+  bottom: -14px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+/* BLOG */
+.blog {
+  max-width: 800px;
+  margin: 0 auto;
+  background-color: #ffffff;
+}
+
+.blog__block {
+  position: relative;
+}
+
+.blog__down {
+  position: absolute;
+  left: 60px;
+  bottom: 40px;
+
+  color: #ffffff;
+}
+
+.blog__down p {
+  max-width: 470px;
+  font-size: 28px;
+  line-height: 35px;
+}
+
+.blog__block:last-child {
+  padding: 60px 35px;
+
+  font-family: 'Lato';
+  font-size: 18px;
+  line-height: 25px;
+  color: #333333;
+}
+
+.blog__block:last-child p {
+  margin-bottom: 15px;
+}
+
+.blog__block:last-child a {
+  color: #8D4FDB;
+  text-decoration: none;
+}
+
+.blog__person {
+  display: flex;
+
+  margin-bottom: 20px;
+}
+
+.blog__person span {
+  margin-right: 14px;
+}
+
+.blog__person h3 {
+  font-size: 18px;
+  line-height: 19px;
+}
+
+.blog__person time {
+  font-family: 'Lato';
+  font-size: 13px;
+  line-height: 19px;
+}
+
+.blog__more {
+  padding-top: 60px;
+  padding-bottom: 49px;
+  background: #F1F1F1;
+  text-align: center;
+}
+
+.blog__more p {
+  margin-bottom: 21px;
+}
+
+.blog__more a {
+  background: #8D4FDB;
+  border-radius: 3px;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 30px;
+  color: #ffffff;
+  text-decoration: none;
+  padding: 8px 25px;
+}
+
+/* FEATURED */
+.featured {
+  padding-top: 85px;
+  padding-bottom: 90px;
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+.featured__contaner {
+  max-width: 940px;
+  margin: 0 auto;
+}
+
+.featured__title {
+  margin-bottom: 25px;
+
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 40px;
+  text-align: center;
+  color: #333333;
+}
+
+.featured__text {
+  margin-bottom: 50px;
+
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 23px;
+  line-height: 33px;
+  text-align: center;
+  color: #A9AFB3;
+}
+
+.featured__list {
+  margin-bottom: 56px;
+}
+
+.list {
+  display: flex;
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 992px) {
+  .list {
+    justify-content: space-between;
+  }
+}
+
+.list__item {
+  max-width: 300px;
+}
+
+.list__item > div {
+  position: relative;
+  margin-bottom: 23px;
+}
+
+.list__block {
+  display: flex;
+  position: absolute;
+  bottom: 24px;
+  left: 24px;
+
+  color: #ffffff;
+}
+
+.list__person h3 {
+  font-size: 14px;
+  line-height: 19px;
+  font-weight: 400;
+}
+
+.list__person time {
+  font-family: 'Lato', sans-serif;
+  font-weight: 400;
+  font-size: 13px;
+  line-height: 18px;
+}
+
+.list__avatar {
+  width: 35px;
+  height: 35px;
+  margin-right: 8px;
+}
+
+.list__text {
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 28px;
+  color: #000000;
+}
+
+.featured__story {
+  font-family: 'Lato';
+  font-size: 15px;
+  line-height: 30px;
+  color: #333333;
+  text-align: center;
+}
+
+.featured__story a {
+  color: #8D4FDB;
+  text-decoration: none;
+}
+
+/* FOOTER */
+footer {
+  padding-top: 56px;
+  padding-bottom: 45px;
+  padding-left: 15px;
+  padding-right: 15px;
+
+  background: #000000;
+
+  color: #8B8B8B;
+  text-align: center;
+  font-size: 14px;
+}
+
+footer a {
+  color: #8D4FDB;
+  text-decoration: none;
+}
