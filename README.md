@@ -16,6 +16,7 @@
 11. [Проект Sport](https://betokov.github.io/sport/)
 12. [Проект Unicorn](https://betokov.github.io/unicorn/)
 13. [Проект Portfolio](https://betokov.github.io/portfolio/)
+14. [Проект Expoforum](https://betokov.github.io/expoforum/)
 
 ## JS
 1. [Библиотека selectic.js](https://betokov.github.io/selectic/)
