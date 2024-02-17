@@ -617,6 +617,8 @@ body {
 .news {
     padding-top: 75px;
     padding-bottom: 85px;
+
+    background-color: #fAf3e3;
 }
 
 @media (min-width: 992px) {
@@ -724,4 +726,122 @@ body {
     .news__description {
         font-size: 21px;
     }
+}
+
+/* FOOTER */
+.footer {
+    padding-top: 60px;
+    padding-bottom: 30px;
+
+    background-color: #30bcc9;
+
+    color: #ffffff;
+}
+
+.footer .container {
+    display: flex;
+    justify-content: space-between;
+}
+
+.footer__menu {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.footer__menu h2 {
+    margin-bottom: 20px;
+
+    font-family: "Plumb", sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.footer__menu a {
+    color: #e0e0e0;
+}
+
+.footer__menu a {
+    margin-bottom: 10px;
+    display: inline-block;
+}
+
+.footer__menu a:hover {
+    text-decoration: underline;
+    color: #ffc41e;
+}
+
+.footer__menu > li {
+    margin-bottom: 40px;
+}
+
+.footer__menu > li:nth-child(1) {
+    margin-right: 166px;
+}
+
+.footer__menu > li:nth-child(2) {
+    margin-right: 122px;
+}
+
+.footer__menu > li:nth-child(4) {
+    margin-right: 88px;
+}
+
+.footer__menu > li:nth-child(5) {
+    margin-right: 122px;
+}
+
+.footer__block {
+    max-width: 255px;
+    width: 100%;
+}
+
+.footer__social {
+    margin-bottom: 50px;
+}
+
+.footer__social h2,
+.footer__subscribes h2{
+    margin-bottom: 30px;
+
+    font-family: "Plumb", sans-serif;
+    font-weight: 500;
+    font-size: 21px;
+}
+
+.footer__social ul {
+    display: flex;
+}
+
+.footer__social li:not(:last-child) {
+    margin-right: 30px;
+}
+
+.footer__subscribes p {
+    margin-bottom: 25px;
+}
+
+.footer__subscribes form {
+    display: flex;
+}
+
+.footer__subscribes input {
+    max-width: 215px;
+    padding: 13px 20px 11px 20px;
+
+    border: none;
+}
+
+.footer__subscribes input::placeholder {
+    font-size: 12px;
+    color: #9c9c9c;
+}
+
+.footer__subscribes button {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #f6404f;
 }
