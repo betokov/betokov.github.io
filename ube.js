@@ -5937,6 +5937,7 @@ var library = (function (exports, $$1) {
               case 'authorization_success':
                 ubeCookie$1(cookies.UBE_WIDGET_LOGIN, 'Y');
                 ubeCookie$1(cookies.UBE_USERID, result === null || result === void 0 || (_result$user2 = result.user) === null || _result$user2 === void 0 ? void 0 : _result$user2.id, sessionExpiration());
+                ubeCookie$1(cookies.UBE_SESSION_KEY, result.sessionKey, sessionExpiration());
                 getAvStatus(result.sessionKey, formKey).done(function (response) {
                   var av = response.av,
                     trialAccess = response.trialAccess;
@@ -8706,33 +8707,26 @@ var library = (function (exports, $$1) {
           if (query && query.hash && query.hash != "") {
             toggleLoader(true);
             ubeHostFallBack();
-            var urlParams = new URLSearchParams({
-              hash: query.hash,
-              entity: name,
-              source: window.location.hostname,
-              ymid: ubeCookie$1('_ym_uid') || "",
-              pageUrl: window.location.href
-            });
-            var _url = "".concat($__default["default"].ube.host, "/api/session/resolveHash?").concat(urlParams.toString());
+            var url = $__default["default"].ube.host + "/api/session/resolveHash?hash=" + query.hash + "&entity=" + name + "&source=" + window.location.hostname + "&ymid=" + ubeCookie$1('_ym_uid') || "";
             if (redirect) {
-              _url = _url + "&redirect=" + encodeURIComponent(redirect);
+              url = url + "&redirect=" + encodeURIComponent(redirect);
             }
             if (utm_campaign) {
-              _url = _url + "&utm_campaign=" + encodeURIComponent(utm_campaign);
+              url = url + "&utm_campaign=" + encodeURIComponent(utm_campaign);
             }
             if (utm_source) {
-              _url = _url + "&utm_source=" + encodeURIComponent(utm_source);
+              url = url + "&utm_source=" + encodeURIComponent(utm_source);
             }
             if (utm_medium) {
-              _url = _url + "&utm_medium=" + encodeURIComponent(utm_medium);
+              url = url + "&utm_medium=" + encodeURIComponent(utm_medium);
             }
             if (utm_content) {
-              _url = _url + "&utm_content=" + encodeURIComponent(utm_content);
+              url = url + "&utm_content=" + encodeURIComponent(utm_content);
             }
             if (utm_term) {
-              _url = _url + "&utm_term=" + encodeURIComponent(utm_term);
+              url = url + "&utm_term=" + encodeURIComponent(utm_term);
             }
-            $__default["default"].get(_url).always(function () {
+            $__default["default"].get(url).always(function () {
               toggleLoader(false);
             }).done(function (data) {
               if (!redirect || redirect == "") redirect = data.redirectUrl;
