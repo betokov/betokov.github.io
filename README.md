@@ -21,4 +21,7 @@
 ## JS
 1. [Библиотека selectic.js](https://betokov.github.io/selectic/)
 
+## Claude Ai
+1. [Проект Color Word](https://betokov.github.io/color-word/)
+
 
