@@ -1,6 +1,8 @@
 <!DOCTYPE html>
+<html lang="en">
 
 <head>
+  <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Color Words</title>
   <style>
@@ -57,7 +59,6 @@
       padding-bottom: clamp(24px, 6vw, 40px);
     }
 
-    /* HEADER */
     .header {
       text-align: center;
       padding: clamp(12px, 3vw, 24px) 0 clamp(10px, 2.5vw, 16px);
@@ -82,7 +83,6 @@
       color: var(--c-accent);
     }
 
-    /* LANG ROW */
     .lang-row {
       display: flex;
       justify-content: center;
@@ -111,7 +111,6 @@
       background: rgba(200, 255, 87, 0.08);
     }
 
-    /* STATS ROW */
     .stats-row {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -144,7 +143,6 @@
       font-family: var(--font-mono);
     }
 
-    /* GAME AREA */
     .game-area {
       background: var(--c-surface);
       border: 0.5px solid var(--c-border);
@@ -194,7 +192,6 @@
       transition: width 0.3s ease;
     }
 
-    /* TIMER BAR */
     .timer-bar {
       width: 100%;
       height: 3px;
@@ -210,7 +207,6 @@
       border-radius: 2px;
     }
 
-    /* GLOBAL TIMER */
     .global-timer {
       font-size: clamp(28px, 9vw, 44px);
       font-weight: 800;
@@ -232,6 +228,78 @@
 
       to {
         opacity: 0.5
+      }
+    }
+
+    /* DIFFICULTY BADGE */
+    .diff-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: clamp(9px, 2vw, 11px);
+      font-family: var(--font-mono);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid;
+      margin-top: 8px;
+      transition: all 0.4s;
+    }
+
+    .diff-badge.easy {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+      background: rgba(200, 255, 87, 0.08);
+    }
+
+    .diff-badge.medium {
+      border-color: #ffb347;
+      color: #ffb347;
+      background: rgba(255, 179, 71, 0.08);
+    }
+
+    .diff-badge.hard {
+      border-color: var(--c-accent2);
+      color: var(--c-accent2);
+      background: rgba(255, 107, 107, 0.08);
+    }
+
+    .diff-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+    }
+
+    /* STREAK DISPLAY */
+    .streak-display {
+      font-size: clamp(10px, 2.5vw, 13px);
+      font-family: var(--font-mono);
+      color: var(--c-muted);
+      margin-top: 6px;
+      transition: all 0.2s;
+    }
+
+    .streak-display.hot {
+      color: #ff914d;
+      font-weight: 700;
+    }
+
+    .streak-fire {
+      display: inline-block;
+      animation: fireAnim 0.3s ease;
+    }
+
+    @keyframes fireAnim {
+      0% {
+        transform: scale(1)
+      }
+
+      50% {
+        transform: scale(1.4)
+      }
+
+      100% {
+        transform: scale(1)
       }
     }
 
@@ -280,7 +348,118 @@
       border-color: var(--c-accent2);
     }
 
-    /* START BUTTON */
+    /* TYPE INPUT MODE */
+    .type-input-wrap {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    .type-input {
+      width: 100%;
+      padding: clamp(14px, 4vw, 18px) var(--pad);
+      font-size: clamp(18px, 5vw, 26px);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      background: var(--c-surface);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      color: var(--c-text);
+      text-align: center;
+      outline: none;
+      transition: border-color 0.2s;
+      letter-spacing: 0.05em;
+      caret-color: var(--c-accent);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .type-input:focus {
+      border-color: rgba(200, 255, 87, 0.5);
+    }
+
+    .type-input.shake {
+      animation: shake 0.35s ease;
+      border-color: var(--c-accent2);
+    }
+
+    .type-input.glow {
+      border-color: var(--c-accent);
+      background: rgba(200, 255, 87, 0.05);
+    }
+
+    @keyframes shake {
+
+      0%,
+      100% {
+        transform: translateX(0)
+      }
+
+      20% {
+        transform: translateX(-8px)
+      }
+
+      40% {
+        transform: translateX(8px)
+      }
+
+      60% {
+        transform: translateX(-5px)
+      }
+
+      80% {
+        transform: translateX(5px)
+      }
+    }
+
+    .type-hint {
+      font-size: clamp(9px, 2.2vw, 11px);
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .type-submit {
+      width: 100%;
+      padding: clamp(12px, 3.5vw, 16px);
+      font-size: clamp(13px, 3.5vw, 15px);
+      font-weight: 700;
+      font-family: var(--font-head);
+      background: var(--c-surface2);
+      color: var(--c-muted);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: all 0.15s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .type-submit:hover {
+      border-color: rgba(200, 255, 87, 0.4);
+      color: var(--c-accent);
+    }
+
+    .type-submit:active {
+      transform: scale(0.98);
+    }
+
+    /* Autocomplete hint */
+    .type-autocomplete {
+      font-size: clamp(9px, 2.2vw, 11px);
+      font-family: var(--font-mono);
+      color: var(--c-muted);
+      text-align: center;
+      min-height: 16px;
+      transition: color 0.15s;
+    }
+
+    .type-autocomplete.match {
+      color: var(--c-accent);
+    }
+
     .start-btn {
       width: 100%;
       padding: var(--btn-pad);
@@ -306,7 +485,6 @@
       transform: scale(0.98);
     }
 
-    /* SETTINGS PANEL */
     .settings-panel {
       background: var(--c-surface);
       border: 0.5px solid var(--c-border);
@@ -374,7 +552,6 @@
       color: var(--c-text);
     }
 
-    /* INTRO */
     #intro-text {
       font-size: clamp(11px, 3vw, 13px);
       color: var(--c-muted);
@@ -383,7 +560,6 @@
       line-height: 1.8;
     }
 
-    /* RESULTS */
     .result-area {
       background: var(--c-surface);
       border: 0.5px solid var(--c-border);
@@ -453,7 +629,90 @@
       color: var(--c-accent2);
     }
 
-    /* HISTORY */
+    /* HEATMAP */
+    .heatmap-wrap {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--pad);
+      margin-bottom: var(--gap);
+    }
+
+    .heatmap-title {
+      font-size: clamp(9px, 2.2vw, 11px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 12px;
+    }
+
+    .heatmap-grid {
+      display: grid;
+      gap: 3px;
+    }
+
+    .heatmap-cell {
+      aspect-ratio: 1;
+      border-radius: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: clamp(7px, 1.8vw, 9px);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      cursor: default;
+      transition: transform 0.1s;
+      position: relative;
+    }
+
+    .heatmap-cell:hover {
+      transform: scale(1.1);
+      z-index: 1;
+    }
+
+    .heatmap-legend {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 10px;
+      font-size: 10px;
+      font-family: var(--font-mono);
+      color: var(--c-muted);
+    }
+
+    .heatmap-legend-bar {
+      display: flex;
+      gap: 2px;
+    }
+
+    .heatmap-legend-dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 2px;
+    }
+
+    .heatmap-axis-labels {
+      display: grid;
+      gap: 3px;
+      font-size: clamp(7px, 1.8vw, 9px);
+      font-family: var(--font-mono);
+      color: var(--c-muted);
+    }
+
+    .heatmap-row-label {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .heatmap-label-text {
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: clamp(40px, 12vw, 70px);
+    }
+
     .section-label {
       font-size: clamp(9px, 2.2vw, 11px);
       letter-spacing: 0.15em;
@@ -503,7 +762,6 @@
       font-family: var(--font-mono);
     }
 
-    /* CHART */
     .chart-wrap {
       background: var(--c-surface);
       border: 0.5px solid var(--c-border);
@@ -512,7 +770,6 @@
       margin-bottom: var(--gap);
     }
 
-    /* TABS */
     .tabs {
       display: flex;
       gap: var(--gap);
@@ -543,7 +800,6 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    /* MODE BADGE */
     .mode-badge {
       display: inline-block;
       font-size: clamp(8px, 2vw, 10px);
@@ -565,7 +821,11 @@
       color: #4d9fff;
     }
 
-    /* ANIMATIONS */
+    .mode-badge.type {
+      border-color: #c77dff;
+      color: #c77dff;
+    }
+
     .flash-correct {
       animation: flashGood 0.3s ease;
     }
@@ -598,8 +858,7 @@
       display: none !important;
     }
 
-    /* TABLET: 540px+ */
-    @media (min-width: 540px) {
+    @media (min-width:540px) {
       .color-buttons {
         grid-template-columns: repeat(4, 1fr);
       }
@@ -613,8 +872,7 @@
       }
     }
 
-    /* DESKTOP: 768px+ */
-    @media (min-width: 768px) {
+    @media (min-width:768px) {
       #app {
         padding: 24px 32px 48px;
       }
@@ -664,8 +922,7 @@
       }
     }
 
-    /* LARGE DESKTOP: 1024px+ — side by side layout */
-    @media (min-width: 1024px) {
+    @media (min-width:1024px) {
       #app {
         max-width: 900px;
       }
@@ -678,7 +935,7 @@
       }
 
       #gameScreen .timer-bar {
-        grid-column: 1 / -1;
+        grid-column: 1/-1;
       }
 
       #gameScreen .game-area {
@@ -689,6 +946,12 @@
       #gameScreen .color-buttons {
         grid-column: 2;
         grid-template-columns: 1fr 1fr;
+        align-content: start;
+        margin-bottom: 0;
+      }
+
+      #gameScreen .type-input-wrap {
+        grid-column: 2;
         align-content: start;
         margin-bottom: 0;
       }
@@ -734,8 +997,7 @@
       }
     }
 
-    /* SMALL PHONES: max 360px */
-    @media (max-width: 360px) {
+    @media (max-width:360px) {
       .lang-row {
         gap: 3px;
       }
@@ -760,8 +1022,7 @@
       }
     }
 
-    /* Safe area for notched phones */
-    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+    @supports (padding-bottom:env(safe-area-inset-bottom)) {
       #app {
         padding-bottom: calc(clamp(24px, 6vw, 40px) + env(safe-area-inset-bottom));
       }
@@ -770,7 +1031,6 @@
 </head>
 
 <body>
-
   <div id="app">
     <div class="header">
       <div class="logo">Stroop Challenge</div>
@@ -805,6 +1065,15 @@
       <div class="settings-panel">
         <div class="settings-title" id="lbl-settings">Settings</div>
         <div class="option-group">
+          <div class="option-label" id="lbl-inputmode">Input mode</div>
+          <div class="option-row">
+            <button class="opt-btn selected" data-imode="buttons" onclick="setInputMode('buttons')"
+              id="btn-imode-buttons">🎯 Buttons</button>
+            <button class="opt-btn" data-imode="type" onclick="setInputMode('type')" id="btn-imode-type">⌨️ Type
+              it</button>
+          </div>
+        </div>
+        <div class="option-group">
           <div class="option-label" id="lbl-timermode">Timer mode</div>
           <div class="option-row">
             <button class="opt-btn selected" data-mode="word" onclick="setMode('word')" id="btn-mode-word">⚡ Per
@@ -829,6 +1098,13 @@
             <button class="opt-btn" data-tt="120" onclick="setTotalTime(120)">2min</button>
           </div>
         </div>
+        <div class="option-group">
+          <div class="option-label" id="lbl-adaptlabel">Adaptive difficulty</div>
+          <div class="option-row">
+            <button class="opt-btn selected" data-adapt="on" onclick="setAdaptive(true)" id="btn-adapt-on">✦ On</button>
+            <button class="opt-btn" data-adapt="off" onclick="setAdaptive(false)" id="btn-adapt-off">— Off</button>
+          </div>
+        </div>
       </div>
       <div class="idle-right">
         <div class="game-area">
@@ -849,11 +1125,20 @@
           <div class="global-timer" id="globalTimerDisp">60</div>
         </div>
         <div class="word-display" id="wordDisplay">—</div>
+        <div class="diff-badge easy" id="diffBadge"><span class="diff-dot"></span><span id="diffText">easy</span></div>
+        <div class="streak-display" id="streakDisplay"></div>
         <div class="progress-bar-wrap">
           <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
         </div>
       </div>
-      <div class="color-buttons" id="colorButtons"></div>
+      <div class="color-buttons hidden" id="colorButtons"></div>
+      <div class="type-input-wrap hidden" id="typeInputWrap">
+        <div class="type-autocomplete" id="typeAutocomplete"></div>
+        <input class="type-input" id="typeInput" type="text" autocomplete="off" autocorrect="off" autocapitalize="off"
+          spellcheck="false" />
+        <div class="type-hint" id="typeHint"></div>
+        <button class="type-submit" id="typeSubmit"></button>
+      </div>
     </div>
 
     <div id="resultScreen" class="hidden">
@@ -886,6 +1171,7 @@
       <div class="tabs">
         <button class="tab-btn active" id="tabHistory" onclick="switchTab('history')">History</button>
         <button class="tab-btn" id="tabChart" onclick="switchTab('chart')">Progress</button>
+        <button class="tab-btn" id="tabHeat" onclick="switchTab('heat')">Heatmap</button>
       </div>
       <div id="panelHistory">
         <div class="section-label" id="lbl-allresults">All Results</div>
@@ -894,26 +1180,41 @@
       <div id="panelChart" class="hidden">
         <div class="chart-wrap"><canvas id="progressChart" height="160"></canvas></div>
       </div>
+      <div id="panelHeat" class="hidden">
+        <div class="heatmap-wrap" id="heatmapWrap"></div>
+      </div>
     </div>
   </div>
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
   <script>
     const LANGS = {
-      en: { colors: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange'], ui: { score: 'Score', word: 'Word', time: 'Time', settings: 'Settings', timermode: 'Timer mode', wordtime: 'Time per word', totaltime: 'Total game time', btnWord: '⚡ Per word', btnTotal: '⏱ Total time', start: 'Start Game', playAgain: 'Play Again', finalScore: 'Final Score', correct: 'Correct', wrong: 'Wrong', seconds: 'Seconds', avgword: 'Avg/word', allresults: 'All Results', history: 'History', progress: 'Progress', intro: 'Tap the color the word is\n<b style="color:var(--c-text)">written in</b> — not what it says.\n25 words per round.', question: 'What COLOR is this word written in?', noGames: 'No games yet' } },
-      ru: { colors: ['Красный', 'Синий', 'Зелёный', 'Жёлтый', 'Фиолетовый', 'Оранжевый'], ui: { score: 'Очки', word: 'Слово', time: 'Время', settings: 'Настройки', timermode: 'Режим таймера', wordtime: 'Время на слово', totaltime: 'Время на игру', btnWord: '⚡ На слово', btnTotal: '⏱ На игру', start: 'Начать игру', playAgain: 'Играть снова', finalScore: 'Итог', correct: 'Правильно', wrong: 'Ошибки', seconds: 'Секунды', avgword: 'Ср/слово', allresults: 'Все результаты', history: 'История', progress: 'График', intro: 'Нажми на цвет, которым\n<b style="color:var(--c-text)">написано</b> слово — не то, что оно означает.\n25 слов за раунд.', question: 'Каким ЦВЕТОМ написано это слово?', noGames: 'Пока нет игр' } },
-      de: { colors: ['Rot', 'Blau', 'Grün', 'Gelb', 'Lila', 'Orange'], ui: { score: 'Punkte', word: 'Wort', time: 'Zeit', settings: 'Einstellungen', timermode: 'Timer-Modus', wordtime: 'Zeit pro Wort', totaltime: 'Gesamtzeit', btnWord: '⚡ Pro Wort', btnTotal: '⏱ Gesamt', start: 'Spiel starten', playAgain: 'Nochmal', finalScore: 'Endergebnis', correct: 'Richtig', wrong: 'Falsch', seconds: 'Sekunden', avgword: 'Ø/Wort', allresults: 'Alle Ergebnisse', history: 'Verlauf', progress: 'Fortschritt', intro: 'Tippe die Farbe, in der das Wort\n<b style="color:var(--c-text)">geschrieben</b> ist — nicht was es bedeutet.\n25 Wörter pro Runde.', question: 'In welcher FARBE ist dieses Wort?', noGames: 'Noch keine Spiele' } },
-      es: { colors: ['Rojo', 'Azul', 'Verde', 'Amarillo', 'Morado', 'Naranja'], ui: { score: 'Puntos', word: 'Palabra', time: 'Tiempo', settings: 'Ajustes', timermode: 'Modo temporizador', wordtime: 'Tiempo por palabra', totaltime: 'Tiempo total', btnWord: '⚡ Por palabra', btnTotal: '⏱ Total', start: 'Iniciar juego', playAgain: 'Jugar de nuevo', finalScore: 'Resultado final', correct: 'Correcto', wrong: 'Incorrecto', seconds: 'Segundos', avgword: 'Prom/pal', allresults: 'Todos resultados', history: 'Historial', progress: 'Progreso', intro: 'Toca el color en el que está\n<b style="color:var(--c-text)">escrita</b> la palabra — no lo que dice.\n25 palabras por ronda.', question: '¿De qué COLOR está escrita esta palabra?', noGames: 'Sin juegos aún' } },
-      fr: { colors: ['Rouge', 'Bleu', 'Vert', 'Jaune', 'Violet', 'Orange'], ui: { score: 'Score', word: 'Mot', time: 'Temps', settings: 'Paramètres', timermode: 'Mode minuterie', wordtime: 'Temps par mot', totaltime: 'Temps total', btnWord: '⚡ Par mot', btnTotal: '⏱ Total', start: 'Commencer', playAgain: 'Rejouer', finalScore: 'Score final', correct: 'Correct', wrong: 'Erreurs', seconds: 'Secondes', avgword: 'Moy/mot', allresults: 'Tous résultats', history: 'Historique', progress: 'Progrès', intro: 'Appuyez sur la couleur dans laquelle\nle mot est <b style="color:var(--c-text)">écrit</b> — pas ce qu\'il dit.\n25 mots par manche.', question: 'De quelle COULEUR est écrit ce mot?', noGames: 'Aucun jeu' } },
-      tr: { colors: ['Kırmızı', 'Mavi', 'Yeşil', 'Sarı', 'Mor', 'Turuncu'], ui: { score: 'Puan', word: 'Kelime', time: 'Süre', settings: 'Ayarlar', timermode: 'Zamanlayıcı modu', wordtime: 'Kelime başına süre', totaltime: 'Toplam süre', btnWord: '⚡ Kelime başına', btnTotal: '⏱ Toplam', start: 'Oyunu Başlat', playAgain: 'Tekrar Oyna', finalScore: 'Final Skoru', correct: 'Doğru', wrong: 'Yanlış', seconds: 'Saniye', avgword: 'Ort/kelime', allresults: 'Tüm Sonuçlar', history: 'Geçmiş', progress: 'İlerleme', intro: 'Kelimenin <b style="color:var(--c-text)">yazıldığı</b> rengi seç\n— ne anlama geldiğini değil.\nTurda 25 kelime.', question: 'Bu kelime hangi RENKTE yazıldı?', noGames: 'Henüz oyun yok' } }
+      en: { colors: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange'], ui: { score: 'Score', word: 'Word', time: 'Time', settings: 'Settings', inputmode: 'Input mode', btnButtons: '🎯 Buttons', btnType: '⌨️ Type it', timermode: 'Timer mode', wordtime: 'Time per word', totaltime: 'Total game time', btnWord: '⚡ Per word', btnTotal: '⏱ Total time', adaptlabel: 'Adaptive difficulty', start: 'Start Game', playAgain: 'Play Again', finalScore: 'Final Score', correct: 'Correct', wrong: 'Wrong', seconds: 'Seconds', avgword: 'Avg/word', allresults: 'All Results', history: 'History', progress: 'Progress', heatmap: 'Heatmap', intro: 'Tap the color the word is\n<b style="color:var(--c-text)">written in</b> — not what it says.\n25 words per round.', introType: 'Type the color the word is\n<b style="color:var(--c-text)">written in</b> — not what it says.\n25 words per round.', question: 'What COLOR is this word written in?', typeHint: 'Type the ink color and press Enter', typeSubmit: 'Confirm', noGames: 'No games yet', streakLabel: 'streak', diffEasy: 'easy', diffMedium: 'medium', diffHard: 'hard', heatTitle: 'Weak spots — word vs ink color', heatAxisInk: '→ ink color', heatAxisWord: '↓ word text', noHeat: 'Play at least one game to see your weak spots.' } },
+      ru: { colors: ['Красный', 'Синий', 'Зелёный', 'Жёлтый', 'Фиолетовый', 'Оранжевый'], ui: { score: 'Очки', word: 'Слово', time: 'Время', settings: 'Настройки', inputmode: 'Режим ввода', btnButtons: '🎯 Кнопки', btnType: '⌨️ Вводить', timermode: 'Режим таймера', wordtime: 'Время на слово', totaltime: 'Время на игру', btnWord: '⚡ На слово', btnTotal: '⏱ На игру', adaptlabel: 'Адаптивная сложность', start: 'Начать игру', playAgain: 'Играть снова', finalScore: 'Итог', correct: 'Правильно', wrong: 'Ошибки', seconds: 'Секунды', avgword: 'Ср/слово', allresults: 'Все результаты', history: 'История', progress: 'График', heatmap: 'Слабые места', intro: 'Нажми на цвет, которым\n<b style="color:var(--c-text)">написано</b> слово — не то, что оно означает.\n25 слов за раунд.', introType: 'Напечатай цвет, которым\n<b style="color:var(--c-text)">написано</b> слово — не то, что оно означает.\n25 слов за раунд.', question: 'Каким ЦВЕТОМ написано это слово?', typeHint: 'Введи цвет чернил и нажми Enter', typeSubmit: 'Подтвердить', noGames: 'Пока нет игр', streakLabel: 'подряд', diffEasy: 'легко', diffMedium: 'средне', diffHard: 'сложно', heatTitle: 'Слабые места — слово vs цвет чернил', heatAxisInk: '→ цвет чернил', heatAxisWord: '↓ текст слова', noHeat: 'Сыграй хотя бы одну игру, чтобы увидеть слабые места.' } },
+      de: { colors: ['Rot', 'Blau', 'Grün', 'Gelb', 'Lila', 'Orange'], ui: { score: 'Punkte', word: 'Wort', time: 'Zeit', settings: 'Einstellungen', inputmode: 'Eingabemodus', btnButtons: '🎯 Buttons', btnType: '⌨️ Tippen', timermode: 'Timer-Modus', wordtime: 'Zeit pro Wort', totaltime: 'Gesamtzeit', btnWord: '⚡ Pro Wort', btnTotal: '⏱ Gesamt', adaptlabel: 'Adaptive Schwierigkeit', start: 'Spiel starten', playAgain: 'Nochmal', finalScore: 'Endergebnis', correct: 'Richtig', wrong: 'Falsch', seconds: 'Sekunden', avgword: 'Ø/Wort', allresults: 'Alle Ergebnisse', history: 'Verlauf', progress: 'Fortschritt', heatmap: 'Schwachstellen', intro: 'Tippe die Farbe, in der das Wort\n<b style="color:var(--c-text)">geschrieben</b> ist — nicht was es bedeutet.\n25 Wörter pro Runde.', introType: 'Schreibe die Farbe, in der das Wort\n<b style="color:var(--c-text)">geschrieben</b> ist.\n25 Wörter pro Runde.', question: 'In welcher FARBE ist dieses Wort?', typeHint: 'Schreibe die Tintenfarbe und drücke Enter', typeSubmit: 'Bestätigen', noGames: 'Noch keine Spiele', streakLabel: 'in Folge', diffEasy: 'leicht', diffMedium: 'mittel', diffHard: 'schwer', heatTitle: 'Schwachstellen — Wort vs Tintenfarbe', heatAxisInk: '→ Tintenfarbe', heatAxisWord: '↓ Worttext', noHeat: 'Spiele mindestens ein Spiel, um deine Schwachstellen zu sehen.' } },
+      es: { colors: ['Rojo', 'Azul', 'Verde', 'Amarillo', 'Morado', 'Naranja'], ui: { score: 'Puntos', word: 'Palabra', time: 'Tiempo', settings: 'Ajustes', inputmode: 'Modo de entrada', btnButtons: '🎯 Botones', btnType: '⌨️ Escribir', timermode: 'Modo temporizador', wordtime: 'Tiempo por palabra', totaltime: 'Tiempo total', btnWord: '⚡ Por palabra', btnTotal: '⏱ Total', adaptlabel: 'Dificultad adaptativa', start: 'Iniciar juego', playAgain: 'Jugar de nuevo', finalScore: 'Resultado final', correct: 'Correcto', wrong: 'Incorrecto', seconds: 'Segundos', avgword: 'Prom/pal', allresults: 'Todos resultados', history: 'Historial', progress: 'Progreso', heatmap: 'Puntos débiles', intro: 'Toca el color en el que está\n<b style="color:var(--c-text)">escrita</b> la palabra — no lo que dice.\n25 palabras por ronda.', introType: 'Escribe el color en el que está\n<b style="color:var(--c-text)">escrita</b> la palabra.\n25 palabras por ronda.', question: '¿De qué COLOR está escrita esta palabra?', typeHint: 'Escribe el color de la tinta y pulsa Enter', typeSubmit: 'Confirmar', noGames: 'Sin juegos aún', streakLabel: 'seguidos', diffEasy: 'fácil', diffMedium: 'medio', diffHard: 'difícil', heatTitle: 'Puntos débiles — palabra vs color de tinta', heatAxisInk: '→ color tinta', heatAxisWord: '↓ texto palabra', noHeat: 'Juega al menos una partida para ver tus puntos débiles.' } },
+      fr: { colors: ['Rouge', 'Bleu', 'Vert', 'Jaune', 'Violet', 'Orange'], ui: { score: 'Score', word: 'Mot', time: 'Temps', settings: 'Paramètres', inputmode: 'Mode de saisie', btnButtons: '🎯 Boutons', btnType: '⌨️ Taper', timermode: 'Mode minuterie', wordtime: 'Temps par mot', totaltime: 'Temps total', btnWord: '⚡ Par mot', btnTotal: '⏱ Total', adaptlabel: 'Difficulté adaptative', start: 'Commencer', playAgain: 'Rejouer', finalScore: 'Score final', correct: 'Correct', wrong: 'Erreurs', seconds: 'Secondes', avgword: 'Moy/mot', allresults: 'Tous résultats', history: 'Historique', progress: 'Progrès', heatmap: 'Points faibles', intro: 'Appuyez sur la couleur dans laquelle\nle mot est <b style="color:var(--c-text)">écrit</b> — pas ce qu\'il dit.\n25 mots par manche.', introType: 'Tapez la couleur dans laquelle\nle mot est <b style="color:var(--c-text)">écrit</b>.\n25 mots par manche.', question: 'De quelle COULEUR est écrit ce mot?', typeHint: 'Tapez la couleur de l\'encre et appuyez sur Entrée', typeSubmit: 'Confirmer', noGames: 'Aucun jeu', streakLabel: 'consécutifs', diffEasy: 'facile', diffMedium: 'moyen', diffHard: 'difficile', heatTitle: 'Points faibles — mot vs couleur encre', heatAxisInk: '→ couleur encre', heatAxisWord: '↓ texte mot', noHeat: 'Jouez au moins une partie pour voir vos points faibles.' } },
+      tr: { colors: ['Kırmızı', 'Mavi', 'Yeşil', 'Sarı', 'Mor', 'Turuncu'], ui: { score: 'Puan', word: 'Kelime', time: 'Süre', settings: 'Ayarlar', inputmode: 'Giriş modu', btnButtons: '🎯 Butonlar', btnType: '⌨️ Yazarak', timermode: 'Zamanlayıcı modu', wordtime: 'Kelime başına süre', totaltime: 'Toplam süre', btnWord: '⚡ Kelime başına', btnTotal: '⏱ Toplam', adaptlabel: 'Uyarlamalı zorluk', start: 'Oyunu Başlat', playAgain: 'Tekrar Oyna', finalScore: 'Final Skoru', correct: 'Doğru', wrong: 'Yanlış', seconds: 'Saniye', avgword: 'Ort/kelime', allresults: 'Tüm Sonuçlar', history: 'Geçmiş', progress: 'İlerleme', heatmap: 'Zayıf noktalar', intro: 'Kelimenin <b style="color:var(--c-text)">yazıldığı</b> rengi seç\n— ne anlama geldiğini değil.\nTurda 25 kelime.', introType: 'Kelimenin <b style="color:var(--c-text)">yazıldığı</b> rengi yaz\n— ne anlama geldiğini değil.\nTurda 25 kelime.', question: 'Bu kelime hangi RENKTE yazıldı?', typeHint: 'Mürekkep rengini yaz ve Enter\'a bas', typeSubmit: 'Onayla', noGames: 'Henüz oyun yok', streakLabel: 'seri', diffEasy: 'kolay', diffMedium: 'orta', diffHard: 'zor', heatTitle: 'Zayıf noktalar — kelime vs mürekkep rengi', heatAxisInk: '→ mürekkep rengi', heatAxisWord: '↓ kelime metni', noHeat: 'Zayıf noktaları görmek için en az bir oyun oyna.' } }
     };
+
     const COLOR_HEXES = ['#ff4d4d', '#4d9fff', '#4dff8a', '#ffe04d', '#c77dff', '#ff914d'];
     const TOTAL_WORDS = 25;
 
     let curLang = 'en', timerMode = 'word', wordTimeSec = 3, totalTimeSec = 60;
-    let state = {}, history = JSON.parse(localStorage.getItem('cw_history3') || '[]');
+    let inputMode = 'buttons', adaptiveOn = true;
+    let state = {}, history = JSON.parse(localStorage.getItem('cw_history4') || '[]');
+    // pairStats[textIdx][inkIdx] = {attempts, errors}
+    let pairStats = JSON.parse(localStorage.getItem('cw_pairStats') || 'null') || initPairStats();
     let chart = null, globalTimerInterval = null, wordTimerInterval = null;
-    let currentWord = null;
+    let currentWord = null, streak = 0;
+
+    function initPairStats() {
+      const s = [];
+      for (let i = 0; i < 6; i++) { s[i] = []; for (let j = 0; j < 6; j++) s[i][j] = { a: 0, e: 0 }; }
+      return s;
+    }
+
+    function savePairStats() { localStorage.setItem('cw_pairStats', JSON.stringify(pairStats)); }
 
     function T() { return LANGS[curLang]; }
     function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
@@ -929,14 +1230,26 @@
       const u = T().ui;
       const ids = {
         'lbl-score': u.score, 'lbl-word': u.word, 'lbl-time': u.time, 'lbl-settings': u.settings,
+        'lbl-inputmode': u.inputmode, 'btn-imode-buttons': u.btnButtons, 'btn-imode-type': u.btnType,
         'lbl-timermode': u.timermode, 'lbl-wordtime': u.wordtime, 'lbl-totaltime': u.totaltime,
         'btn-mode-word': u.btnWord, 'btn-mode-total': u.btnTotal,
+        'lbl-adaptlabel': u.adaptlabel,
         'startBtn': u.start, 'restartBtn': u.playAgain, 'lbl-final': u.finalScore,
         'lbl-correct': u.correct, 'lbl-wrong': u.wrong, 'lbl-seconds': u.seconds, 'lbl-avgword': u.avgword,
-        'lbl-allresults': u.allresults, 'tabHistory': u.history, 'tabChart': u.progress, 'questionLabel': u.question
+        'lbl-allresults': u.allresults, 'tabHistory': u.history, 'tabChart': u.progress, 'tabHeat': u.heatmap,
+        'questionLabel': u.question, 'typeHint': u.typeHint, 'typeSubmit': u.typeSubmit,
+        'diffText': u.diffEasy
       };
       Object.entries(ids).forEach(([id, val]) => { const el = document.getElementById(id); if (el) el.textContent = val; });
-      document.getElementById('intro-text').innerHTML = u.intro.replace(/\n/g, '<br>');
+      const introKey = inputMode === 'type' ? 'introType' : 'intro';
+      document.getElementById('intro-text').innerHTML = u[introKey].replace(/\n/g, '<br>');
+    }
+
+    function setInputMode(mode) {
+      inputMode = mode;
+      document.querySelectorAll('[data-imode]').forEach(b => b.classList.toggle('selected', b.dataset.imode === mode));
+      const introKey = mode === 'type' ? 'introType' : 'intro';
+      document.getElementById('intro-text').innerHTML = T().ui[introKey].replace(/\n/g, '<br>');
     }
 
     function setMode(mode) {
@@ -956,12 +1269,64 @@
       document.querySelectorAll('[data-tt]').forEach(b => b.classList.toggle('selected', +b.dataset.tt === sec));
     }
 
+    function setAdaptive(on) {
+      adaptiveOn = on;
+      document.querySelectorAll('[data-adapt]').forEach(b => b.classList.toggle('selected', b.dataset.adapt === (on ? 'on' : 'off')));
+    }
+
+    // ─── ADAPTIVE DIFFICULTY ───────────────────────────────────────────────────
+    function getPairErrorRate(textIdx, inkIdx) {
+      const s = pairStats[textIdx][inkIdx];
+      if (s.a < 2) return 0;
+      return s.e / s.a;
+    }
+
+    function getDifficultyLevel(textIdx, inkIdx) {
+      const r = getPairErrorRate(textIdx, inkIdx);
+      if (r >= 0.5) return 'hard';
+      if (r >= 0.25) return 'medium';
+      return 'easy';
+    }
+
     function generateWord() {
       const colors = T().colors;
-      const textIdx = Math.floor(Math.random() * colors.length);
-      let inkIdx;
-      do { inkIdx = Math.floor(Math.random() * colors.length); } while (inkIdx === textIdx);
-      return { text: colors[textIdx], inkName: colors[inkIdx], inkHex: COLOR_HEXES[inkIdx], inkIdx };
+      const n = colors.length;
+
+      if (adaptiveOn) {
+        // Build weighted pool: pairs with high error rate get higher weight
+        let pool = [];
+        for (let ti = 0; ti < n; ti++) {
+          for (let ii = 0; ii < n; ii++) {
+            if (ti === ii) continue;
+            const rate = getPairErrorRate(ti, ii);
+            // base weight 1, +3 for medium, +8 for hard pairs
+            const w = rate >= 0.5 ? 9 : rate >= 0.25 ? 4 : 1;
+            for (let k = 0; k < w; k++) pool.push([ti, ii]);
+          }
+        }
+        const pick = pool[Math.floor(Math.random() * pool.length)];
+        return { text: colors[pick[0]], textIdx: pick[0], inkName: colors[pick[1]], inkHex: COLOR_HEXES[pick[1]], inkIdx: pick[1] };
+      } else {
+        const textIdx = Math.floor(Math.random() * n);
+        let inkIdx;
+        do { inkIdx = Math.floor(Math.random() * n); } while (inkIdx === textIdx);
+        return { text: colors[textIdx], textIdx, inkName: colors[inkIdx], inkHex: COLOR_HEXES[inkIdx], inkIdx };
+      }
+    }
+
+    function updateDiffBadge(textIdx, inkIdx) {
+      const level = getDifficultyLevel(textIdx, inkIdx);
+      const badge = document.getElementById('diffBadge');
+      badge.className = 'diff-badge ' + level;
+      document.getElementById('diffText').textContent = T().ui['diff' + level.charAt(0).toUpperCase() + level.slice(1)];
+    }
+
+    function updateStreakDisplay() {
+      const el = document.getElementById('streakDisplay');
+      if (streak < 2) { el.textContent = ''; el.className = 'streak-display'; return; }
+      const fires = streak >= 5 ? ' 🔥' : '';
+      el.innerHTML = `${streak} ${T().ui.streakLabel}${fires}`;
+      el.className = 'streak-display' + (streak >= 5 ? ' hot' : '');
     }
 
     function buildChoices(correctIdx) {
@@ -972,13 +1337,73 @@
       return shuffle([correct, ...others.slice(0, 3)]);
     }
 
+    // ─── TYPE MODE MATCHING ────────────────────────────────────────────────────
+    function normalizeInput(s) {
+      return s.trim().toLowerCase()
+        .replace(/ё/g, 'е').replace(/й/g, 'и') // Russian
+        .replace(/ä/g, 'a').replace(/ö/g, 'o').replace(/ü/g, 'u').replace(/ß/g, 'ss') // German
+        .replace(/[^a-zа-яёêéèàâùûôîïæœç]/g, '');
+    }
+
+    function matchesColor(input, colorName) {
+      const ni = normalizeInput(input);
+      const nc = normalizeInput(colorName);
+      if (!ni) return false;
+      // exact
+      if (ni === nc) return true;
+      // prefix match (min 3 chars for long words, min 2 for short)
+      const minLen = nc.length <= 4 ? 2 : 3;
+      if (ni.length >= minLen && nc.startsWith(ni)) return true;
+      return false;
+    }
+
+    function getAutocompleteSuggestion(input) {
+      if (!input.trim()) return '';
+      const colors = T().colors;
+      const ni = normalizeInput(input);
+      for (const c of colors) {
+        const nc = normalizeInput(c);
+        if (nc.startsWith(ni) && ni.length > 0) return c;
+      }
+      return '';
+    }
+
+    function handleTypeSubmit() {
+      const input = document.getElementById('typeInput');
+      const val = input.value;
+      const colors = T().colors;
+
+      // Find matching color
+      let matchedIdx = -1;
+      for (let i = 0; i < colors.length; i++) {
+        if (matchesColor(val, colors[i])) { matchedIdx = i; break; }
+      }
+
+      if (matchedIdx === -1) {
+        // shake and clear
+        input.classList.add('shake');
+        setTimeout(() => { input.classList.remove('shake'); }, 400);
+        return;
+      }
+
+      const chosen = { name: colors[matchedIdx], hex: COLOR_HEXES[matchedIdx], idx: matchedIdx };
+      handleAnswer(chosen);
+    }
+
+    // ─── GAME FLOW ──────────────────────────────────────────────────────────────
     function startGame() {
       state = { phase: 'game', wordIdx: 0, score: 0, correct: 0, wrong: 0, startTime: Date.now(), wordStart: 0 };
+      streak = 0;
       document.getElementById('idleScreen').classList.add('hidden');
       document.getElementById('resultScreen').classList.add('hidden');
       document.getElementById('gameScreen').classList.remove('hidden');
       document.getElementById('scoreDisp').textContent = '0';
       document.getElementById('wordNum').textContent = '1/' + TOTAL_WORDS;
+      updateStreakDisplay();
+
+      // Show right input area
+      document.getElementById('colorButtons').classList.toggle('hidden', inputMode !== 'buttons');
+      document.getElementById('typeInputWrap').classList.toggle('hidden', inputMode !== 'type');
 
       if (timerMode === 'total') {
         document.getElementById('globalTimerWrap').classList.remove('hidden');
@@ -1009,7 +1434,6 @@
     function nextWord() {
       if (state.wordIdx >= TOTAL_WORDS) { endGame(); return; }
       currentWord = generateWord();
-      const choices = buildChoices(currentWord.inkIdx);
       state.wordStart = Date.now();
 
       const wd = document.getElementById('wordDisplay');
@@ -1018,18 +1442,27 @@
 
       document.getElementById('progressFill').style.width = (state.wordIdx / TOTAL_WORDS * 100) + '%';
       document.getElementById('wordNum').textContent = (state.wordIdx + 1) + '/' + TOTAL_WORDS;
+      updateDiffBadge(currentWord.textIdx, currentWord.inkIdx);
 
-      const btns = document.getElementById('colorButtons');
-      btns.innerHTML = '';
-      choices.forEach(c => {
-        const b = document.createElement('button');
-        b.className = 'color-btn';
-        b.textContent = c.name;
-        b.style.color = c.hex;
-        b.style.borderColor = c.hex + '55';
-        b.onclick = () => handleAnswer(c);
-        btns.appendChild(b);
-      });
+      if (inputMode === 'buttons') {
+        const choices = buildChoices(currentWord.inkIdx);
+        const btns = document.getElementById('colorButtons');
+        btns.innerHTML = '';
+        choices.forEach(c => {
+          const b = document.createElement('button');
+          b.className = 'color-btn'; b.textContent = c.name;
+          b.style.color = c.hex; b.style.borderColor = c.hex + '55';
+          b.onclick = () => handleAnswer(c);
+          btns.appendChild(b);
+        });
+      } else {
+        const inp = document.getElementById('typeInput');
+        inp.value = '';
+        inp.className = 'type-input';
+        document.getElementById('typeAutocomplete').textContent = '';
+        document.getElementById('typeAutocomplete').className = 'type-autocomplete';
+        setTimeout(() => inp.focus(), 50);
+      }
 
       if (timerMode === 'word') {
         clearInterval(wordTimerInterval);
@@ -1053,26 +1486,54 @@
       clearInterval(wordTimerInterval);
       const elapsed = (Date.now() - state.wordStart) / 1000;
       const correct = chosen.idx === currentWord.inkIdx;
-      const speedBonus = correct && timerMode === 'word' ? Math.max(0, Math.round((wordTimeSec - elapsed) * 10)) : 0;
-      const pts = correct ? 100 + speedBonus : 0;
-      state.score += pts; state.wordIdx++;
-      if (correct) state.correct++; else state.wrong++;
 
-      document.querySelectorAll('.color-btn').forEach(b => {
-        b.disabled = true;
-        if (b.textContent === currentWord.inkName) b.classList.add('correct');
-        else if (b.textContent === chosen.name && !correct) b.classList.add('wrong');
-      });
+      // Update pair stats
+      pairStats[currentWord.textIdx][currentWord.inkIdx].a++;
+      if (!correct) pairStats[currentWord.textIdx][currentWord.inkIdx].e++;
+      savePairStats();
+
+      const speedBonus = correct && timerMode === 'word' ? Math.max(0, Math.round((wordTimeSec - elapsed) * 10)) : 0;
+      const streakBonus = correct && streak >= 4 ? Math.floor(streak / 4) * 10 : 0;
+      const pts = correct ? 100 + speedBonus + streakBonus : 0;
+      state.score += pts; state.wordIdx++;
+      if (correct) { state.correct++; streak++; } else { state.wrong++; streak = 0; }
+      updateStreakDisplay();
+
+      if (inputMode === 'buttons') {
+        document.querySelectorAll('.color-btn').forEach(b => {
+          b.disabled = true;
+          if (b.textContent === currentWord.inkName) b.classList.add('correct');
+          else if (b.textContent === chosen.name && !correct) b.classList.add('wrong');
+        });
+      } else {
+        const inp = document.getElementById('typeInput');
+        inp.disabled = true;
+        inp.classList.add(correct ? 'glow' : 'shake');
+        if (!correct) {
+          // Show correct answer briefly
+          inp.value = currentWord.inkName;
+        }
+      }
 
       document.getElementById('scoreDisp').textContent = state.score;
       const ga = document.getElementById('gameArea');
       ga.classList.add(correct ? 'flash-correct' : 'flash-wrong');
       setTimeout(() => { ga.classList.remove('flash-correct', 'flash-wrong'); }, 320);
-      setTimeout(nextWord, 380);
+      setTimeout(() => {
+        if (inputMode === 'type') {
+          const inp = document.getElementById('typeInput');
+          inp.disabled = false; inp.className = 'type-input'; inp.value = '';
+        }
+        nextWord();
+      }, 420);
     }
 
     function handleTimeout() {
-      state.wrong++; state.wordIdx++;
+      state.wrong++; state.wordIdx++; streak = 0;
+      updateStreakDisplay();
+      pairStats[currentWord.textIdx][currentWord.inkIdx].a++;
+      pairStats[currentWord.textIdx][currentWord.inkIdx].e++;
+      savePairStats();
       const ga = document.getElementById('gameArea');
       ga.classList.add('flash-wrong');
       setTimeout(() => { ga.classList.remove('flash-wrong'); nextWord(); }, 380);
@@ -1085,10 +1546,10 @@
       const avg = total > 0 ? (elapsed / total).toFixed(1) : '—';
       const pct = total > 0 ? Math.round(state.correct / total * 100) : 0;
 
-      const entry = { score: state.score, correct: state.correct, wrong: state.wrong, total, time: elapsed, pct, mode: timerMode, lang: curLang, date: new Date().toLocaleDateString() };
+      const entry = { score: state.score, correct: state.correct, wrong: state.wrong, total, time: elapsed, pct, mode: timerMode, inputMode, lang: curLang, date: new Date().toLocaleDateString() };
       history.unshift(entry);
       if (history.length > 20) history = history.slice(0, 20);
-      localStorage.setItem('cw_history3', JSON.stringify(history));
+      localStorage.setItem('cw_history4', JSON.stringify(history));
 
       document.getElementById('gameScreen').classList.add('hidden');
       document.getElementById('resultScreen').classList.remove('hidden');
@@ -1114,8 +1575,9 @@
       history.forEach((e, i) => {
         const d = document.createElement('div');
         d.className = 'history-item';
+        const modeIcon = e.inputMode === 'type' ? '⌨️' : '🎯';
         const modeBadge = `<span class="mode-badge ${e.mode}">${e.mode === 'word' ? '⚡' : '⏱'}</span>`;
-        d.innerHTML = `<span class="history-idx">#${i + 1}</span><div style="min-width:0;flex:1"><div class="history-meta">${e.date} ${modeBadge} <span style="color:var(--c-muted);font-size:9px;">${e.lang || ''}</span></div><div class="history-meta">${e.correct}/${e.total || 25} · ${e.time}s</div></div><div class="history-score">${e.score}</div>`;
+        d.innerHTML = `<span class="history-idx">#${i + 1}</span><div style="min-width:0;flex:1"><div class="history-meta">${e.date} ${modeBadge} ${modeIcon} <span style="color:var(--c-muted);font-size:9px;">${e.lang || ''}</span></div><div class="history-meta">${e.correct}/${e.total || 25} · ${e.time}s</div></div><div class="history-score">${e.score}</div>`;
         list.appendChild(d);
       });
     }
@@ -1144,13 +1606,128 @@
       });
     }
 
-    function switchTab(tab) {
-      document.getElementById('tabHistory').classList.toggle('active', tab === 'history');
-      document.getElementById('tabChart').classList.toggle('active', tab === 'chart');
-      document.getElementById('panelHistory').classList.toggle('hidden', tab !== 'history');
-      document.getElementById('panelChart').classList.toggle('hidden', tab !== 'chart');
-      if (tab === 'chart') renderChart();
+    // ─── HEATMAP ───────────────────────────────────────────────────────────────
+    function renderHeatmap() {
+      const wrap = document.getElementById('heatmapWrap');
+      const u = T().ui;
+      const colors = T().colors;
+      const n = colors.length;
+
+      // Check if any data
+      let hasData = false;
+      for (let ti = 0; ti < n; ti++) for (let ii = 0; ii < n; ii++) if (pairStats[ti][ii].a > 0) { hasData = true; break; }
+
+      if (!hasData) {
+        wrap.innerHTML = `<div class="heatmap-title">${u.heatTitle}</div><div style="color:var(--c-muted);font-size:12px;font-family:var(--font-mono);padding:8px 0;">${u.noHeat}</div>`;
+        return;
+      }
+
+      // Compute error rates
+      const rates = [];
+      let maxRate = 0;
+      for (let ti = 0; ti < n; ti++) {
+        rates[ti] = [];
+        for (let ii = 0; ii < n; ii++) {
+          const s = pairStats[ti][ii];
+          const r = ti === ii ? -1 : (s.a > 0 ? s.e / s.a : 0);
+          rates[ti][ii] = r;
+          if (r > maxRate) maxRate = r;
+        }
+      }
+
+      function rateToColor(r) {
+        if (r < 0) return 'rgba(255,255,255,0.03)'; // diagonal
+        if (r === 0 && pairStats.flat) {
+          // check if actually attempted
+        }
+        if (r === 0) return 'rgba(200,255,87,0.08)';
+        // interpolate green -> orange -> red
+        const t = Math.min(1, r / Math.max(maxRate, 0.5));
+        if (t < 0.5) {
+          const p = t * 2;
+          return `rgba(${Math.round(255 * p)},${Math.round(179 + 76 * (1 - p))},${Math.round(71 * (1 - p))},${0.15 + 0.5 * t})`;
+        } else {
+          const p = (t - 0.5) * 2;
+          return `rgba(255,${Math.round(179 * (1 - p))},${Math.round(71 * (1 - p))},${0.4 + 0.4 * p})`;
+        }
+      }
+
+      // Calculate cell size based on available width
+      const appW = Math.min(document.getElementById('app').offsetWidth - 40, 480);
+      const labelW = Math.min(70, appW * 0.15);
+      const gridW = appW - labelW - 20;
+      const cellSize = Math.floor(gridW / (n + 0.5));
+
+      let html = `<div class="heatmap-title">${u.heatTitle}</div>`;
+
+      // Column headers (ink colors)
+      html += `<div style="display:flex;align-items:center;gap:3px;margin-bottom:3px;padding-left:${labelW + 3}px;">`;
+      for (let ii = 0; ii < n; ii++) {
+        html += `<div style="width:${cellSize}px;flex-shrink:0;font-size:clamp(6px,1.5vw,9px);font-family:var(--font-mono);color:${COLOR_HEXES[ii]};text-align:center;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:700;" title="${colors[ii]}">${colors[ii].substring(0, 3)}</div>`;
+      }
+      html += `</div>`;
+
+      // Rows (word text)
+      for (let ti = 0; ti < n; ti++) {
+        html += `<div style="display:flex;align-items:center;gap:3px;margin-bottom:3px;">`;
+        html += `<div style="width:${labelW}px;flex-shrink:0;font-size:clamp(6px,1.5vw,9px);font-family:var(--font-mono);color:${COLOR_HEXES[ti]};text-align:right;padding-right:6px;overflow:hidden;white-space:nowrap;text-overflow:ellipsis;font-weight:700;" title="${colors[ti]}">${colors[ti]}</div>`;
+        for (let ii = 0; ii < n; ii++) {
+          const s = pairStats[ti][ii];
+          const r = rates[ti][ii];
+          const bg = rateToColor(r);
+          const errPct = s.a > 0 ? Math.round(r * 100) : null;
+          const label = ti === ii ? '×' : (errPct !== null ? errPct + '%' : '');
+          const title = ti === ii ? 'same' : `"${colors[ti]}" written in ${colors[ii]}: ${s.e}/${s.a} errors`;
+          html += `<div style="width:${cellSize}px;height:${cellSize}px;flex-shrink:0;background:${bg};border-radius:3px;display:flex;align-items:center;justify-content:center;font-size:clamp(6px,1.4vw,8px);font-family:var(--font-mono);color:rgba(240,239,245,0.7);cursor:default;" title="${title}">${label}</div>`;
+        }
+        html += `</div>`;
+      }
+
+      // Legend
+      html += `<div class="heatmap-legend"><span>0%</span><div class="heatmap-legend-bar">`;
+      const steps = ['rgba(200,255,87,0.15)', 'rgba(128,220,60,0.3)', 'rgba(255,179,71,0.4)', 'rgba(255,120,50,0.6)', 'rgba(255,70,70,0.85)'];
+      steps.forEach(c => { html += `<div class="heatmap-legend-dot" style="background:${c}"></div>`; });
+      html += `</div><span>100%</span><span style="margin-left:auto;color:var(--c-muted);">${u.heatAxisInk}</span></div>`;
+
+      wrap.innerHTML = html;
     }
+
+    function switchTab(tab) {
+      ['history', 'chart', 'heat'].forEach(t => {
+        document.getElementById('tab' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('active', tab === t);
+        document.getElementById('panel' + t.charAt(0).toUpperCase() + t.slice(1)).classList.toggle('hidden', tab !== t);
+      });
+      if (tab === 'chart') renderChart();
+      if (tab === 'heat') renderHeatmap();
+    }
+
+    // ─── TYPE INPUT EVENTS ─────────────────────────────────────────────────────
+    document.getElementById('typeInput').addEventListener('input', function () {
+      const sug = getAutocompleteSuggestion(this.value);
+      const ac = document.getElementById('typeAutocomplete');
+      if (sug && sug.toLowerCase() !== this.value.toLowerCase()) {
+        ac.textContent = '→ ' + sug;
+        ac.className = 'type-autocomplete match';
+      } else if (sug) {
+        ac.textContent = '✓ ' + sug;
+        ac.className = 'type-autocomplete match';
+      } else {
+        ac.textContent = this.value ? '?' : '';
+        ac.className = 'type-autocomplete';
+      }
+    });
+
+    document.getElementById('typeInput').addEventListener('keydown', function (e) {
+      if (e.key === 'Enter') { e.preventDefault(); handleTypeSubmit(); }
+      // Tab to autocomplete
+      if (e.key === 'Tab') {
+        e.preventDefault();
+        const sug = getAutocompleteSuggestion(this.value);
+        if (sug) { this.value = sug; this.dispatchEvent(new Event('input')); }
+      }
+    });
+
+    document.getElementById('typeSubmit').onclick = handleTypeSubmit;
 
     document.getElementById('startBtn').onclick = startGame;
     document.getElementById('restartBtn').onclick = () => {
@@ -1161,3 +1738,5 @@
     applyTranslations();
   </script>
 </body>
+
+</html>
