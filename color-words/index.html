@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Color Words</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=Space+Mono:wght@400;700&display=swap');
+
+    *,
+    *::before,
+    *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    :root {
+      --c-bg: #0d0d0f;
+      --c-surface: #18181c;
+      --c-surface2: #222228;
+      --c-border: rgba(255, 255, 255, 0.08);
+      --c-text: #f0eff5;
+      --c-muted: rgba(240, 239, 245, 0.45);
+      --c-accent: #c8ff57;
+      --c-accent2: #ff6b6b;
+      --radius: clamp(10px, 2.5vw, 16px);
+      --radius-sm: clamp(8px, 2vw, 10px);
+      --font-head: 'Syne', sans-serif;
+      --font-mono: 'Space Mono', monospace;
+      --pad: clamp(12px, 4vw, 20px);
+      --gap: clamp(6px, 2vw, 10px);
+      --word-size: clamp(28px, 9vw, 56px);
+      --stat-val: clamp(16px, 4.5vw, 22px);
+      --stat-lbl: clamp(8px, 2vw, 10px);
+      --btn-pad: clamp(12px, 3.5vw, 18px);
+      --btn-size: clamp(14px, 4vw, 17px);
+      --opt-size: clamp(11px, 3vw, 13px);
+      --col-btn-size: clamp(13px, 3.5vw, 15px);
+      --col-btn-pad: clamp(12px, 3.5vw, 16px);
+    }
+
+    html,
+    body {
+      width: 100%;
+      min-height: 100%;
+      background: var(--c-bg);
+      color: var(--c-text);
+      font-family: var(--font-head);
+      -webkit-text-size-adjust: 100%;
+    }
+
+    #app {
+      width: 100%;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: var(--pad);
+      padding-bottom: clamp(24px, 6vw, 40px);
+    }
+
+    /* HEADER */
+    .header {
+      text-align: center;
+      padding: clamp(12px, 3vw, 24px) 0 clamp(10px, 2.5vw, 16px);
+    }
+
+    .logo {
+      font-size: clamp(9px, 2.2vw, 11px);
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .title {
+      font-size: clamp(22px, 7vw, 34px);
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .title span {
+      color: var(--c-accent);
+    }
+
+    /* LANG ROW */
+    .lang-row {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: clamp(4px, 1.5vw, 6px);
+      margin-bottom: clamp(10px, 2.5vw, 14px);
+    }
+
+    .lang-pill {
+      padding: clamp(4px, 1.2vw, 5px) clamp(10px, 2.5vw, 14px);
+      font-size: clamp(10px, 2.5vw, 12px);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      border: 1.5px solid var(--c-border);
+      border-radius: 20px;
+      background: transparent;
+      color: var(--c-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      white-space: nowrap;
+    }
+
+    .lang-pill.selected {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+      background: rgba(200, 255, 87, 0.08);
+    }
+
+    /* STATS ROW */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    .stat-card {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: clamp(8px, 2.5vw, 12px);
+      text-align: center;
+    }
+
+    .stat-val {
+      font-size: var(--stat-val);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--c-accent);
+      line-height: 1.2;
+    }
+
+    .stat-label {
+      font-size: var(--stat-lbl);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+    }
+
+    /* GAME AREA */
+    .game-area {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: clamp(16px, 5vw, 28px) var(--pad);
+      margin-bottom: var(--gap);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: clamp(140px, 35vw, 200px);
+    }
+
+    .word-display {
+      font-size: var(--word-size);
+      font-weight: 800;
+      text-align: center;
+      transition: all 0.12s;
+      letter-spacing: -1px;
+      user-select: none;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    .question-label {
+      font-size: clamp(9px, 2.2vw, 11px);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: clamp(10px, 2.5vw, 16px);
+      text-align: center;
+    }
+
+    .progress-bar-wrap {
+      width: 100%;
+      height: 3px;
+      background: var(--c-surface2);
+      border-radius: 2px;
+      margin-top: clamp(12px, 3vw, 20px);
+    }
+
+    .progress-bar-fill {
+      height: 3px;
+      background: var(--c-accent);
+      border-radius: 2px;
+      transition: width 0.3s ease;
+    }
+
+    /* TIMER BAR */
+    .timer-bar {
+      width: 100%;
+      height: 3px;
+      background: var(--c-surface2);
+      border-radius: 2px;
+      margin-bottom: var(--gap);
+      overflow: hidden;
+    }
+
+    .timer-fill {
+      height: 3px;
+      background: var(--c-accent);
+      border-radius: 2px;
+    }
+
+    /* GLOBAL TIMER */
+    .global-timer {
+      font-size: clamp(28px, 9vw, 44px);
+      font-weight: 800;
+      font-family: var(--font-mono);
+      color: var(--c-accent);
+      text-align: center;
+      margin-bottom: clamp(8px, 2vw, 12px);
+    }
+
+    .global-timer.warn {
+      color: var(--c-accent2);
+      animation: pulse 0.5s infinite alternate;
+    }
+
+    @keyframes pulse {
+      from {
+        opacity: 1
+      }
+
+      to {
+        opacity: 0.5
+      }
+    }
+
+    /* COLOR BUTTONS */
+    .color-buttons {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    .color-btn {
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: var(--col-btn-pad) 8px;
+      font-size: var(--col-btn-size);
+      font-weight: 700;
+      font-family: var(--font-head);
+      cursor: pointer;
+      transition: transform 0.1s, opacity 0.1s;
+      background: var(--c-surface);
+      color: inherit;
+      letter-spacing: 0.02em;
+      min-height: clamp(44px, 12vw, 56px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .color-btn:active {
+      transform: scale(0.96);
+    }
+
+    .color-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    .color-btn.correct {
+      background: rgba(200, 255, 87, 0.15);
+      border-color: var(--c-accent);
+    }
+
+    .color-btn.wrong {
+      background: rgba(255, 107, 107, 0.15);
+      border-color: var(--c-accent2);
+    }
+
+    /* START BUTTON */
+    .start-btn {
+      width: 100%;
+      padding: var(--btn-pad);
+      font-size: var(--btn-size);
+      font-weight: 700;
+      font-family: var(--font-head);
+      background: var(--c-accent);
+      color: #0d0d0f;
+      border: none;
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: opacity 0.15s, transform 0.1s;
+      min-height: clamp(48px, 13vw, 58px);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .start-btn:hover {
+      opacity: 0.9;
+    }
+
+    .start-btn:active {
+      transform: scale(0.98);
+    }
+
+    /* SETTINGS PANEL */
+    .settings-panel {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--pad);
+      margin-bottom: var(--gap);
+    }
+
+    .settings-title {
+      font-size: clamp(9px, 2.2vw, 11px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: clamp(10px, 2.5vw, 14px);
+    }
+
+    .option-group {
+      margin-bottom: clamp(10px, 2.5vw, 16px);
+    }
+
+    .option-group:last-child {
+      margin-bottom: 0;
+    }
+
+    .option-label {
+      font-size: var(--opt-size);
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: clamp(6px, 1.5vw, 8px);
+    }
+
+    .option-row {
+      display: flex;
+      gap: var(--gap);
+      flex-wrap: wrap;
+    }
+
+    .opt-btn {
+      flex: 1;
+      min-width: clamp(60px, 20vw, 80px);
+      padding: clamp(8px, 2.5vw, 10px) 6px;
+      font-size: var(--opt-size);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      border: 1.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--c-muted);
+      cursor: pointer;
+      transition: all 0.15s;
+      text-align: center;
+      min-height: clamp(36px, 10vw, 44px);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .opt-btn.selected {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+      background: rgba(200, 255, 87, 0.08);
+    }
+
+    .opt-btn:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      color: var(--c-text);
+    }
+
+    /* INTRO */
+    #intro-text {
+      font-size: clamp(11px, 3vw, 13px);
+      color: var(--c-muted);
+      text-align: center;
+      font-family: var(--font-mono);
+      line-height: 1.8;
+    }
+
+    /* RESULTS */
+    .result-area {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--pad);
+      margin-bottom: var(--gap);
+      text-align: center;
+    }
+
+    .result-score {
+      font-size: clamp(36px, 12vw, 58px);
+      font-weight: 800;
+      color: var(--c-accent);
+      font-family: var(--font-mono);
+      line-height: 1.1;
+    }
+
+    .result-label {
+      font-size: clamp(9px, 2.2vw, 12px);
+      color: var(--c-muted);
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+      font-family: var(--font-mono);
+      margin-bottom: 4px;
+    }
+
+    .result-detail {
+      font-size: clamp(10px, 2.5vw, 13px);
+      color: var(--c-muted);
+      margin-top: 8px;
+      font-family: var(--font-mono);
+    }
+
+    .result-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: var(--gap);
+      margin-top: var(--gap);
+    }
+
+    .result-metric {
+      background: var(--c-surface2);
+      border-radius: var(--radius-sm);
+      padding: clamp(8px, 2.5vw, 12px);
+    }
+
+    .result-metric-val {
+      font-size: clamp(16px, 5vw, 20px);
+      font-weight: 700;
+      font-family: var(--font-mono);
+    }
+
+    .result-metric-lbl {
+      font-size: clamp(8px, 2vw, 10px);
+      color: var(--c-muted);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      font-family: var(--font-mono);
+      margin-top: 2px;
+    }
+
+    .correct-color {
+      color: var(--c-accent);
+    }
+
+    .wrong-color {
+      color: var(--c-accent2);
+    }
+
+    /* HISTORY */
+    .section-label {
+      font-size: clamp(9px, 2.2vw, 11px);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      margin-bottom: var(--gap);
+    }
+
+    .history-list {
+      display: flex;
+      flex-direction: column;
+      gap: clamp(4px, 1.5vw, 6px);
+      max-height: clamp(180px, 45vw, 240px);
+      overflow-y: auto;
+    }
+
+    .history-item {
+      display: flex;
+      align-items: center;
+      gap: var(--gap);
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      padding: clamp(8px, 2.5vw, 12px) clamp(10px, 3vw, 14px);
+    }
+
+    .history-idx {
+      font-size: clamp(9px, 2.2vw, 11px);
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+      min-width: 18px;
+    }
+
+    .history-score {
+      font-size: clamp(13px, 4vw, 16px);
+      font-weight: 700;
+      font-family: var(--font-mono);
+      color: var(--c-accent);
+      margin-left: auto;
+      white-space: nowrap;
+    }
+
+    .history-meta {
+      font-size: clamp(9px, 2.2vw, 11px);
+      color: var(--c-muted);
+      font-family: var(--font-mono);
+    }
+
+    /* CHART */
+    .chart-wrap {
+      background: var(--c-surface);
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: clamp(10px, 3vw, 16px) clamp(8px, 2.5vw, 12px) 8px;
+      margin-bottom: var(--gap);
+    }
+
+    /* TABS */
+    .tabs {
+      display: flex;
+      gap: var(--gap);
+      margin-bottom: var(--gap);
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: clamp(7px, 2vw, 9px);
+      font-size: clamp(10px, 2.5vw, 12px);
+      font-family: var(--font-mono);
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      border: 0.5px solid var(--c-border);
+      border-radius: var(--radius-sm);
+      background: transparent;
+      color: var(--c-muted);
+      cursor: pointer;
+      text-transform: uppercase;
+      transition: all 0.15s;
+      min-height: clamp(36px, 10vw, 44px);
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .tab-btn.active {
+      background: var(--c-surface2);
+      color: var(--c-text);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* MODE BADGE */
+    .mode-badge {
+      display: inline-block;
+      font-size: clamp(8px, 2vw, 10px);
+      font-family: var(--font-mono);
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid;
+      margin-left: 4px;
+      vertical-align: middle;
+    }
+
+    .mode-badge.word {
+      border-color: var(--c-accent);
+      color: var(--c-accent);
+    }
+
+    .mode-badge.total {
+      border-color: #4d9fff;
+      color: #4d9fff;
+    }
+
+    /* ANIMATIONS */
+    .flash-correct {
+      animation: flashGood 0.3s ease;
+    }
+
+    .flash-wrong {
+      animation: flashBad 0.3s ease;
+    }
+
+    @keyframes flashGood {
+      0% {
+        background: rgba(200, 255, 87, 0.3)
+      }
+
+      100% {
+        background: var(--c-surface)
+      }
+    }
+
+    @keyframes flashBad {
+      0% {
+        background: rgba(255, 107, 107, 0.3)
+      }
+
+      100% {
+        background: var(--c-surface)
+      }
+    }
+
+    .hidden {
+      display: none !important;
+    }
+
+    /* TABLET: 540px+ */
+    @media (min-width: 540px) {
+      .color-buttons {
+        grid-template-columns: repeat(4, 1fr);
+      }
+
+      .option-row {
+        flex-wrap: nowrap;
+      }
+
+      .lang-row {
+        gap: 8px;
+      }
+    }
+
+    /* DESKTOP: 768px+ */
+    @media (min-width: 768px) {
+      #app {
+        padding: 24px 32px 48px;
+      }
+
+      .header {
+        padding: 28px 0 20px;
+      }
+
+      .title {
+        font-size: 38px;
+      }
+
+      .word-display {
+        font-size: 64px;
+      }
+
+      .game-area {
+        min-height: 220px;
+        padding: 32px 28px;
+      }
+
+      .color-buttons {
+        grid-template-columns: repeat(4, 1fr);
+        gap: 12px;
+      }
+
+      .color-btn {
+        min-height: 60px;
+        font-size: 15px;
+      }
+
+      .stats-row {
+        gap: 12px;
+        margin-bottom: 12px;
+      }
+
+      .stat-val {
+        font-size: 24px;
+      }
+
+      .global-timer {
+        font-size: 48px;
+      }
+
+      .result-score {
+        font-size: 64px;
+      }
+    }
+
+    /* LARGE DESKTOP: 1024px+ — side by side layout */
+    @media (min-width: 1024px) {
+      #app {
+        max-width: 900px;
+      }
+
+      #gameScreen {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+
+      #gameScreen .timer-bar {
+        grid-column: 1 / -1;
+      }
+
+      #gameScreen .game-area {
+        grid-column: 1;
+        margin-bottom: 0;
+      }
+
+      #gameScreen .color-buttons {
+        grid-column: 2;
+        grid-template-columns: 1fr 1fr;
+        align-content: start;
+        margin-bottom: 0;
+      }
+
+      #idleScreen {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        align-items: start;
+      }
+
+      #idleScreen .settings-panel {
+        grid-column: 1;
+        margin-bottom: 0;
+      }
+
+      #idleScreen .idle-right {
+        grid-column: 2;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+
+      #resultScreen .result-area {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        text-align: left;
+        align-items: start;
+      }
+
+      #resultScreen .result-score-block {
+        grid-column: 1;
+      }
+
+      #resultScreen .result-grid {
+        grid-column: 2;
+        margin-top: 0;
+      }
+
+      .history-list {
+        max-height: 280px;
+      }
+    }
+
+    /* SMALL PHONES: max 360px */
+    @media (max-width: 360px) {
+      .lang-row {
+        gap: 3px;
+      }
+
+      .lang-pill {
+        padding: 4px 8px;
+        font-size: 10px;
+      }
+
+      .word-display {
+        font-size: clamp(22px, 8vw, 34px);
+      }
+
+      .color-btn {
+        font-size: 12px;
+        padding: 10px 6px;
+      }
+
+      .start-btn {
+        font-size: 14px;
+        padding: 13px;
+      }
+    }
+
+    /* Safe area for notched phones */
+    @supports (padding-bottom: env(safe-area-inset-bottom)) {
+      #app {
+        padding-bottom: calc(clamp(24px, 6vw, 40px) + env(safe-area-inset-bottom));
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="app">
+    <div class="header">
+      <div class="logo">Stroop Challenge</div>
+      <div class="title">Color<span>Words</span></div>
+    </div>
+
+    <div class="lang-row">
+      <button class="lang-pill selected" data-lang="en" onclick="setLang('en')">EN</button>
+      <button class="lang-pill" data-lang="ru" onclick="setLang('ru')">RU</button>
+      <button class="lang-pill" data-lang="de" onclick="setLang('de')">DE</button>
+      <button class="lang-pill" data-lang="es" onclick="setLang('es')">ES</button>
+      <button class="lang-pill" data-lang="fr" onclick="setLang('fr')">FR</button>
+      <button class="lang-pill" data-lang="tr" onclick="setLang('tr')">TR</button>
+    </div>
+
+    <div class="stats-row">
+      <div class="stat-card">
+        <div class="stat-val" id="scoreDisp">0</div>
+        <div class="stat-label" id="lbl-score">Score</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="wordNum">—</div>
+        <div class="stat-label" id="lbl-word">Word</div>
+      </div>
+      <div class="stat-card">
+        <div class="stat-val" id="timerDisp">—</div>
+        <div class="stat-label" id="lbl-time">Time</div>
+      </div>
+    </div>
+
+    <div id="idleScreen">
+      <div class="settings-panel">
+        <div class="settings-title" id="lbl-settings">Settings</div>
+        <div class="option-group">
+          <div class="option-label" id="lbl-timermode">Timer mode</div>
+          <div class="option-row">
+            <button class="opt-btn selected" data-mode="word" onclick="setMode('word')" id="btn-mode-word">⚡ Per
+              word</button>
+            <button class="opt-btn" data-mode="total" onclick="setMode('total')" id="btn-mode-total">⏱ Total
+              time</button>
+          </div>
+        </div>
+        <div class="option-group" id="wordTimeGroup">
+          <div class="option-label" id="lbl-wordtime">Time per word</div>
+          <div class="option-row">
+            <button class="opt-btn selected" data-wt="3" onclick="setWordTime(3)">3s</button>
+            <button class="opt-btn" data-wt="5" onclick="setWordTime(5)">5s</button>
+            <button class="opt-btn" data-wt="8" onclick="setWordTime(8)">8s</button>
+          </div>
+        </div>
+        <div class="option-group hidden" id="totalTimeGroup">
+          <div class="option-label" id="lbl-totaltime">Total game time</div>
+          <div class="option-row">
+            <button class="opt-btn" data-tt="30" onclick="setTotalTime(30)">30s</button>
+            <button class="opt-btn selected" data-tt="60" onclick="setTotalTime(60)">60s</button>
+            <button class="opt-btn" data-tt="120" onclick="setTotalTime(120)">2min</button>
+          </div>
+        </div>
+      </div>
+      <div class="idle-right">
+        <div class="game-area">
+          <div style="font-size:clamp(28px,8vw,40px);font-weight:800;color:var(--c-accent);margin-bottom:10px;">?</div>
+          <div id="intro-text"></div>
+        </div>
+        <button class="start-btn" id="startBtn"></button>
+      </div>
+    </div>
+
+    <div id="gameScreen" class="hidden">
+      <div class="timer-bar">
+        <div class="timer-fill" id="timerFill" style="width:100%"></div>
+      </div>
+      <div class="game-area" id="gameArea">
+        <div class="question-label" id="questionLabel"></div>
+        <div id="globalTimerWrap" class="hidden">
+          <div class="global-timer" id="globalTimerDisp">60</div>
+        </div>
+        <div class="word-display" id="wordDisplay">—</div>
+        <div class="progress-bar-wrap">
+          <div class="progress-bar-fill" id="progressFill" style="width:0%"></div>
+        </div>
+      </div>
+      <div class="color-buttons" id="colorButtons"></div>
+    </div>
+
+    <div id="resultScreen" class="hidden">
+      <div class="result-area">
+        <div class="result-score-block">
+          <div class="result-label" id="lbl-final">Final Score</div>
+          <div class="result-score" id="finalScore">—</div>
+          <div class="result-detail" id="resultDetail">—</div>
+        </div>
+        <div class="result-grid">
+          <div class="result-metric">
+            <div class="result-metric-val correct-color" id="resCorrect">—</div>
+            <div class="result-metric-lbl" id="lbl-correct">Correct</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-val wrong-color" id="resWrong">—</div>
+            <div class="result-metric-lbl" id="lbl-wrong">Wrong</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-val" id="resTime">—</div>
+            <div class="result-metric-lbl" id="lbl-seconds">Seconds</div>
+          </div>
+          <div class="result-metric">
+            <div class="result-metric-val" id="resAvg">—</div>
+            <div class="result-metric-lbl" id="lbl-avgword">Avg/word</div>
+          </div>
+        </div>
+      </div>
+      <button class="start-btn" id="restartBtn" style="margin-bottom:var(--gap);"></button>
+      <div class="tabs">
+        <button class="tab-btn active" id="tabHistory" onclick="switchTab('history')">History</button>
+        <button class="tab-btn" id="tabChart" onclick="switchTab('chart')">Progress</button>
+      </div>
+      <div id="panelHistory">
+        <div class="section-label" id="lbl-allresults">All Results</div>
+        <div class="history-list" id="historyList"></div>
+      </div>
+      <div id="panelChart" class="hidden">
+        <div class="chart-wrap"><canvas id="progressChart" height="160"></canvas></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script>
+    const LANGS = {
+      en: { colors: ['Red', 'Blue', 'Green', 'Yellow', 'Purple', 'Orange'], ui: { score: 'Score', word: 'Word', time: 'Time', settings: 'Settings', timermode: 'Timer mode', wordtime: 'Time per word', totaltime: 'Total game time', btnWord: '⚡ Per word', btnTotal: '⏱ Total time', start: 'Start Game', playAgain: 'Play Again', finalScore: 'Final Score', correct: 'Correct', wrong: 'Wrong', seconds: 'Seconds', avgword: 'Avg/word', allresults: 'All Results', history: 'History', progress: 'Progress', intro: 'Tap the color the word is\n<b style="color:var(--c-text)">written in</b> — not what it says.\n25 words per round.', question: 'What COLOR is this word written in?', noGames: 'No games yet' } },
+      ru: { colors: ['Красный', 'Синий', 'Зелёный', 'Жёлтый', 'Фиолетовый', 'Оранжевый'], ui: { score: 'Очки', word: 'Слово', time: 'Время', settings: 'Настройки', timermode: 'Режим таймера', wordtime: 'Время на слово', totaltime: 'Время на игру', btnWord: '⚡ На слово', btnTotal: '⏱ На игру', start: 'Начать игру', playAgain: 'Играть снова', finalScore: 'Итог', correct: 'Правильно', wrong: 'Ошибки', seconds: 'Секунды', avgword: 'Ср/слово', allresults: 'Все результаты', history: 'История', progress: 'График', intro: 'Нажми на цвет, которым\n<b style="color:var(--c-text)">написано</b> слово — не то, что оно означает.\n25 слов за раунд.', question: 'Каким ЦВЕТОМ написано это слово?', noGames: 'Пока нет игр' } },
+      de: { colors: ['Rot', 'Blau', 'Grün', 'Gelb', 'Lila', 'Orange'], ui: { score: 'Punkte', word: 'Wort', time: 'Zeit', settings: 'Einstellungen', timermode: 'Timer-Modus', wordtime: 'Zeit pro Wort', totaltime: 'Gesamtzeit', btnWord: '⚡ Pro Wort', btnTotal: '⏱ Gesamt', start: 'Spiel starten', playAgain: 'Nochmal', finalScore: 'Endergebnis', correct: 'Richtig', wrong: 'Falsch', seconds: 'Sekunden', avgword: 'Ø/Wort', allresults: 'Alle Ergebnisse', history: 'Verlauf', progress: 'Fortschritt', intro: 'Tippe die Farbe, in der das Wort\n<b style="color:var(--c-text)">geschrieben</b> ist — nicht was es bedeutet.\n25 Wörter pro Runde.', question: 'In welcher FARBE ist dieses Wort?', noGames: 'Noch keine Spiele' } },
+      es: { colors: ['Rojo', 'Azul', 'Verde', 'Amarillo', 'Morado', 'Naranja'], ui: { score: 'Puntos', word: 'Palabra', time: 'Tiempo', settings: 'Ajustes', timermode: 'Modo temporizador', wordtime: 'Tiempo por palabra', totaltime: 'Tiempo total', btnWord: '⚡ Por palabra', btnTotal: '⏱ Total', start: 'Iniciar juego', playAgain: 'Jugar de nuevo', finalScore: 'Resultado final', correct: 'Correcto', wrong: 'Incorrecto', seconds: 'Segundos', avgword: 'Prom/pal', allresults: 'Todos resultados', history: 'Historial', progress: 'Progreso', intro: 'Toca el color en el que está\n<b style="color:var(--c-text)">escrita</b> la palabra — no lo que dice.\n25 palabras por ronda.', question: '¿De qué COLOR está escrita esta palabra?', noGames: 'Sin juegos aún' } },
+      fr: { colors: ['Rouge', 'Bleu', 'Vert', 'Jaune', 'Violet', 'Orange'], ui: { score: 'Score', word: 'Mot', time: 'Temps', settings: 'Paramètres', timermode: 'Mode minuterie', wordtime: 'Temps par mot', totaltime: 'Temps total', btnWord: '⚡ Par mot', btnTotal: '⏱ Total', start: 'Commencer', playAgain: 'Rejouer', finalScore: 'Score final', correct: 'Correct', wrong: 'Erreurs', seconds: 'Secondes', avgword: 'Moy/mot', allresults: 'Tous résultats', history: 'Historique', progress: 'Progrès', intro: 'Appuyez sur la couleur dans laquelle\nle mot est <b style="color:var(--c-text)">écrit</b> — pas ce qu\'il dit.\n25 mots par manche.', question: 'De quelle COULEUR est écrit ce mot?', noGames: 'Aucun jeu' } },
+      tr: { colors: ['Kırmızı', 'Mavi', 'Yeşil', 'Sarı', 'Mor', 'Turuncu'], ui: { score: 'Puan', word: 'Kelime', time: 'Süre', settings: 'Ayarlar', timermode: 'Zamanlayıcı modu', wordtime: 'Kelime başına süre', totaltime: 'Toplam süre', btnWord: '⚡ Kelime başına', btnTotal: '⏱ Toplam', start: 'Oyunu Başlat', playAgain: 'Tekrar Oyna', finalScore: 'Final Skoru', correct: 'Doğru', wrong: 'Yanlış', seconds: 'Saniye', avgword: 'Ort/kelime', allresults: 'Tüm Sonuçlar', history: 'Geçmiş', progress: 'İlerleme', intro: 'Kelimenin <b style="color:var(--c-text)">yazıldığı</b> rengi seç\n— ne anlama geldiğini değil.\nTurda 25 kelime.', question: 'Bu kelime hangi RENKTE yazıldı?', noGames: 'Henüz oyun yok' } }
+    };
+    const COLOR_HEXES = ['#ff4d4d', '#4d9fff', '#4dff8a', '#ffe04d', '#c77dff', '#ff914d'];
+    const TOTAL_WORDS = 25;
+
+    let curLang = 'en', timerMode = 'word', wordTimeSec = 3, totalTimeSec = 60;
+    let state = {}, history = JSON.parse(localStorage.getItem('cw_history3') || '[]');
+    let chart = null, globalTimerInterval = null, wordTimerInterval = null;
+    let currentWord = null;
+
+    function T() { return LANGS[curLang]; }
+    function rand(arr) { return arr[Math.floor(Math.random() * arr.length)]; }
+    function shuffle(arr) { return [...arr].sort(() => Math.random() - 0.5); }
+
+    function setLang(lang) {
+      curLang = lang;
+      document.querySelectorAll('.lang-pill').forEach(b => b.classList.toggle('selected', b.dataset.lang === lang));
+      applyTranslations();
+    }
+
+    function applyTranslations() {
+      const u = T().ui;
+      const ids = {
+        'lbl-score': u.score, 'lbl-word': u.word, 'lbl-time': u.time, 'lbl-settings': u.settings,
+        'lbl-timermode': u.timermode, 'lbl-wordtime': u.wordtime, 'lbl-totaltime': u.totaltime,
+        'btn-mode-word': u.btnWord, 'btn-mode-total': u.btnTotal,
+        'startBtn': u.start, 'restartBtn': u.playAgain, 'lbl-final': u.finalScore,
+        'lbl-correct': u.correct, 'lbl-wrong': u.wrong, 'lbl-seconds': u.seconds, 'lbl-avgword': u.avgword,
+        'lbl-allresults': u.allresults, 'tabHistory': u.history, 'tabChart': u.progress, 'questionLabel': u.question
+      };
+      Object.entries(ids).forEach(([id, val]) => { const el = document.getElementById(id); if (el) el.textContent = val; });
+      document.getElementById('intro-text').innerHTML = u.intro.replace(/\n/g, '<br>');
+    }
+
+    function setMode(mode) {
+      timerMode = mode;
+      document.querySelectorAll('[data-mode]').forEach(b => b.classList.toggle('selected', b.dataset.mode === mode));
+      document.getElementById('wordTimeGroup').classList.toggle('hidden', mode !== 'word');
+      document.getElementById('totalTimeGroup').classList.toggle('hidden', mode !== 'total');
+    }
+
+    function setWordTime(sec) {
+      wordTimeSec = sec;
+      document.querySelectorAll('[data-wt]').forEach(b => b.classList.toggle('selected', +b.dataset.wt === sec));
+    }
+
+    function setTotalTime(sec) {
+      totalTimeSec = sec;
+      document.querySelectorAll('[data-tt]').forEach(b => b.classList.toggle('selected', +b.dataset.tt === sec));
+    }
+
+    function generateWord() {
+      const colors = T().colors;
+      const textIdx = Math.floor(Math.random() * colors.length);
+      let inkIdx;
+      do { inkIdx = Math.floor(Math.random() * colors.length); } while (inkIdx === textIdx);
+      return { text: colors[textIdx], inkName: colors[inkIdx], inkHex: COLOR_HEXES[inkIdx], inkIdx };
+    }
+
+    function buildChoices(correctIdx) {
+      const colors = T().colors;
+      const all = colors.map((n, i) => ({ name: n, hex: COLOR_HEXES[i], idx: i }));
+      const correct = all[correctIdx];
+      const others = shuffle(all.filter(c => c.idx !== correctIdx));
+      return shuffle([correct, ...others.slice(0, 3)]);
+    }
+
+    function startGame() {
+      state = { phase: 'game', wordIdx: 0, score: 0, correct: 0, wrong: 0, startTime: Date.now(), wordStart: 0 };
+      document.getElementById('idleScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.add('hidden');
+      document.getElementById('gameScreen').classList.remove('hidden');
+      document.getElementById('scoreDisp').textContent = '0';
+      document.getElementById('wordNum').textContent = '1/' + TOTAL_WORDS;
+
+      if (timerMode === 'total') {
+        document.getElementById('globalTimerWrap').classList.remove('hidden');
+        document.getElementById('timerFill').style.width = '100%';
+        let remaining = totalTimeSec;
+        updateGlobalTimer(remaining);
+        globalTimerInterval = setInterval(() => {
+          remaining -= 0.1;
+          const pct = Math.max(0, remaining / totalTimeSec * 100);
+          document.getElementById('timerFill').style.width = pct + '%';
+          document.getElementById('timerFill').style.background = pct < 20 ? '#ff6b6b' : pct < 40 ? '#ffb347' : 'var(--c-accent)';
+          document.getElementById('timerDisp').textContent = Math.ceil(remaining) + 's';
+          updateGlobalTimer(remaining);
+          if (remaining <= 0) { clearInterval(globalTimerInterval); endGame(); }
+        }, 100);
+      } else {
+        document.getElementById('globalTimerWrap').classList.add('hidden');
+      }
+      nextWord();
+    }
+
+    function updateGlobalTimer(remaining) {
+      const el = document.getElementById('globalTimerDisp');
+      el.textContent = Math.ceil(Math.max(0, remaining));
+      el.className = 'global-timer' + (remaining <= 10 ? ' warn' : '');
+    }
+
+    function nextWord() {
+      if (state.wordIdx >= TOTAL_WORDS) { endGame(); return; }
+      currentWord = generateWord();
+      const choices = buildChoices(currentWord.inkIdx);
+      state.wordStart = Date.now();
+
+      const wd = document.getElementById('wordDisplay');
+      wd.textContent = currentWord.text;
+      wd.style.color = currentWord.inkHex;
+
+      document.getElementById('progressFill').style.width = (state.wordIdx / TOTAL_WORDS * 100) + '%';
+      document.getElementById('wordNum').textContent = (state.wordIdx + 1) + '/' + TOTAL_WORDS;
+
+      const btns = document.getElementById('colorButtons');
+      btns.innerHTML = '';
+      choices.forEach(c => {
+        const b = document.createElement('button');
+        b.className = 'color-btn';
+        b.textContent = c.name;
+        b.style.color = c.hex;
+        b.style.borderColor = c.hex + '55';
+        b.onclick = () => handleAnswer(c);
+        btns.appendChild(b);
+      });
+
+      if (timerMode === 'word') {
+        clearInterval(wordTimerInterval);
+        const fill = document.getElementById('timerFill');
+        fill.style.width = '100%'; fill.style.background = 'var(--c-accent)';
+        const ms = wordTimeSec * 1000, t0 = Date.now();
+        wordTimerInterval = setInterval(() => {
+          const elapsed = Date.now() - t0;
+          const pct = Math.max(0, 100 - elapsed / ms * 100);
+          fill.style.width = pct + '%';
+          fill.style.background = pct < 30 ? '#ff6b6b' : pct < 60 ? '#ffb347' : 'var(--c-accent)';
+          document.getElementById('timerDisp').textContent = (Math.max(0, (ms - elapsed) / 1000)).toFixed(1);
+          if (elapsed >= ms) { clearInterval(wordTimerInterval); handleTimeout(); }
+        }, 80);
+      } else {
+        document.getElementById('timerDisp').textContent = '';
+      }
+    }
+
+    function handleAnswer(chosen) {
+      clearInterval(wordTimerInterval);
+      const elapsed = (Date.now() - state.wordStart) / 1000;
+      const correct = chosen.idx === currentWord.inkIdx;
+      const speedBonus = correct && timerMode === 'word' ? Math.max(0, Math.round((wordTimeSec - elapsed) * 10)) : 0;
+      const pts = correct ? 100 + speedBonus : 0;
+      state.score += pts; state.wordIdx++;
+      if (correct) state.correct++; else state.wrong++;
+
+      document.querySelectorAll('.color-btn').forEach(b => {
+        b.disabled = true;
+        if (b.textContent === currentWord.inkName) b.classList.add('correct');
+        else if (b.textContent === chosen.name && !correct) b.classList.add('wrong');
+      });
+
+      document.getElementById('scoreDisp').textContent = state.score;
+      const ga = document.getElementById('gameArea');
+      ga.classList.add(correct ? 'flash-correct' : 'flash-wrong');
+      setTimeout(() => { ga.classList.remove('flash-correct', 'flash-wrong'); }, 320);
+      setTimeout(nextWord, 380);
+    }
+
+    function handleTimeout() {
+      state.wrong++; state.wordIdx++;
+      const ga = document.getElementById('gameArea');
+      ga.classList.add('flash-wrong');
+      setTimeout(() => { ga.classList.remove('flash-wrong'); nextWord(); }, 380);
+    }
+
+    function endGame() {
+      clearInterval(wordTimerInterval); clearInterval(globalTimerInterval);
+      const total = state.correct + state.wrong;
+      const elapsed = Math.round((Date.now() - state.startTime) / 1000);
+      const avg = total > 0 ? (elapsed / total).toFixed(1) : '—';
+      const pct = total > 0 ? Math.round(state.correct / total * 100) : 0;
+
+      const entry = { score: state.score, correct: state.correct, wrong: state.wrong, total, time: elapsed, pct, mode: timerMode, lang: curLang, date: new Date().toLocaleDateString() };
+      history.unshift(entry);
+      if (history.length > 20) history = history.slice(0, 20);
+      localStorage.setItem('cw_history3', JSON.stringify(history));
+
+      document.getElementById('gameScreen').classList.add('hidden');
+      document.getElementById('resultScreen').classList.remove('hidden');
+      document.getElementById('finalScore').textContent = state.score;
+      document.getElementById('resultDetail').textContent = pct + '% · ' + elapsed + 's · ' + total + ' words';
+      document.getElementById('resCorrect').textContent = state.correct;
+      document.getElementById('resWrong').textContent = state.wrong;
+      document.getElementById('resTime').textContent = elapsed;
+      document.getElementById('resAvg').textContent = avg + 's';
+      document.getElementById('wordNum').textContent = total + '/' + TOTAL_WORDS;
+      document.getElementById('timerDisp').textContent = elapsed + 's';
+
+      renderHistory(); switchTab('history');
+    }
+
+    function renderHistory() {
+      const list = document.getElementById('historyList');
+      list.innerHTML = '';
+      if (!history.length) {
+        list.innerHTML = '<div style="color:var(--c-muted);font-size:13px;font-family:var(--font-mono);padding:12px 0;">' + T().ui.noGames + '</div>';
+        return;
+      }
+      history.forEach((e, i) => {
+        const d = document.createElement('div');
+        d.className = 'history-item';
+        const modeBadge = `<span class="mode-badge ${e.mode}">${e.mode === 'word' ? '⚡' : '⏱'}</span>`;
+        d.innerHTML = `<span class="history-idx">#${i + 1}</span><div style="min-width:0;flex:1"><div class="history-meta">${e.date} ${modeBadge} <span style="color:var(--c-muted);font-size:9px;">${e.lang || ''}</span></div><div class="history-meta">${e.correct}/${e.total || 25} · ${e.time}s</div></div><div class="history-score">${e.score}</div>`;
+        list.appendChild(d);
+      });
+    }
+
+    function renderChart() {
+      const ctx = document.getElementById('progressChart').getContext('2d');
+      if (chart) chart.destroy();
+      const data = [...history].reverse();
+      chart = new Chart(ctx, {
+        data: {
+          labels: data.map((_, i) => '#' + (i + 1)),
+          datasets: [
+            { type: 'line', label: 'Score', data: data.map(e => e.score), borderColor: '#c8ff57', backgroundColor: 'rgba(200,255,87,0.08)', borderWidth: 2, pointBackgroundColor: '#c8ff57', pointRadius: 3, tension: 0.3, yAxisID: 'y' },
+            { type: 'bar', label: 'Accuracy %', data: data.map(e => e.pct), backgroundColor: 'rgba(77,159,255,0.25)', borderColor: '#4d9fff', borderWidth: 1, borderRadius: 3, yAxisID: 'y2' }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: true,
+          plugins: { legend: { labels: { color: 'rgba(240,239,245,0.55)', font: { size: 10, family: 'Space Mono' }, boxWidth: 10 } } },
+          scales: {
+            x: { ticks: { color: 'rgba(240,239,245,0.4)', font: { size: 9, family: 'Space Mono' } }, grid: { color: 'rgba(255,255,255,0.04)' } },
+            y: { position: 'left', ticks: { color: '#c8ff57', font: { size: 9, family: 'Space Mono' } }, grid: { color: 'rgba(255,255,255,0.05)' } },
+            y2: { position: 'right', min: 0, max: 100, ticks: { color: '#4d9fff', font: { size: 9, family: 'Space Mono' }, callback: v => v + '%' }, grid: { drawOnChartArea: false } }
+          }
+        }
+      });
+    }
+
+    function switchTab(tab) {
+      document.getElementById('tabHistory').classList.toggle('active', tab === 'history');
+      document.getElementById('tabChart').classList.toggle('active', tab === 'chart');
+      document.getElementById('panelHistory').classList.toggle('hidden', tab !== 'history');
+      document.getElementById('panelChart').classList.toggle('hidden', tab !== 'chart');
+      if (tab === 'chart') renderChart();
+    }
+
+    document.getElementById('startBtn').onclick = startGame;
+    document.getElementById('restartBtn').onclick = () => {
+      document.getElementById('resultScreen').classList.add('hidden');
+      document.getElementById('idleScreen').classList.remove('hidden');
+    };
+
+    applyTranslations();
+  </script>
+</body>
